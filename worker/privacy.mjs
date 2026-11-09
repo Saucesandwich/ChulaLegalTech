@@ -106,7 +106,8 @@ function retentionPanel(url) {
   ${Object.entries({none:'ยังไม่ยืนยันฐานการเก็บ', standard:'ยืนยันฐานแล้ว และใช้กรอบทั่วไป', exception:'มีเหตุที่อาจเข้าข้อยกเว้น'}).map(([id, label]) => `<option value="${id}"${basis === id ? ' selected' : ''}>${label}</option>`).join('')}</select></label>
   <label>วันที่เสร็จสิ้นการดำเนินการ (ถ้าทราบ)<input type="date" name="finish" value="${date ? finish : ''}"></label>
   </div><button class="secondary-button">ประเมินระยะเก็บ</button></form>
-  ${owns(outcome, basis) ? `<p class="hiring-note" role="status">${outcome[basis]}</p>` : ''}
+    ${owns(outcome, basis) ? `<p class="hiring-note" role="status">${outcome[basis]}</p>` : ''}
+    <p>เครื่องมือนี้คำนวณจากวันที่ที่กรอกและไม่บันทึกข้อมูลในแบบประเมิน</p>
   <details class="hiring-plan"><summary>เช็กลิสต์ก่อนขอข้อมูลอ่อนไหว</summary><ol>
   <li>ระบุเหตุที่จำเป็นต่อหน้าที่งานและตรวจฐานที่รองรับ รวมถึงมาตรการสำหรับข้อมูลประวัติอาชญากรรม</li>
   <li>แจ้งวัตถุประสงค์และระยะเก็บ จำกัดการเข้าถึงให้เฉพาะผู้มีหน้าที่ และพิจารณาใช้ข้อมูลที่เปิดเผยน้อยกว่า</li>

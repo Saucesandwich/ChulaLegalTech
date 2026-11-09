@@ -142,7 +142,7 @@ function companyHome(data, now) {
     ['งานเปิดรับ', data.jobs.filter(job => job.selection_end > now).length, '/company/jobs#jobs'],
     ['ใบสมัครที่ส่งแล้ว', Object.values(data.cases).filter(row => row.status === 'applied').length, '/company/jobs#jobs'],
     ['หลักฐานรอตรวจ', Object.values(data.verifications).filter(row => row.status === 'pending').length, '/company/jobs#verify'],
-    ['เคสรอทบทวนข้อกำหนด', Object.values(data.cases).filter(row => row.status === 'review').length, '/company/jobs#jobs'],
+    ['เคสรอทบทวนข้อกำหนด', data.jobs.filter(job => job.selection_end > now && data.cases[job.id]?.status === 'review').length, '/company/jobs#jobs'],
     ['คำขอใช้สิทธิที่รอทบทวน', data.requests.filter(row => row.status === 'pending').length, '/company/privacy#requests']
   ];
   return `<section class="hiring-panel"><h2>งานที่ต้องติดตาม</h2><div class="hiring-job-grid">${counts.map(([label, count, href]) =>
