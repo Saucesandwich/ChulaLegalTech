@@ -53,7 +53,7 @@ function entryPage(role) {
     : `<h1>ยินดีต้อนรับสู่ปาท่องโก๋</h1>
     <p>เลือกฝั่งที่อยากทดลอง สลับฝั่งได้ในเบราว์เซอร์เดียวกัน</p>
     <div class="portal-choices">
-      ${button('applicant', 'สำหรับผู้สมัคร', 'ค้นหางานและดูสิทธิของฉัน')}
+      ${button('applicant', 'สำหรับผู้สมัคร', 'ดูภาพรวมการหางานและสิทธิของฉัน')}
       ${button('company', 'สำหรับบริษัท', 'ดูภาพรวมการสรรหาและจัดการข้อมูล')}
     </div>`;
   return response(`<!doctype html><html lang="th"><head><meta charset="utf-8">
@@ -70,7 +70,7 @@ async function enterDemo(url, env, key, role, session) {
   const value = role + '.' + space + '.' + (Math.floor(Date.now() / 1000) + sessionSeconds);
   const proof = await signature(key, 'session:' + value);
   const hex = Array.from(new Uint8Array(proof), byte => byte.toString(16).padStart(2, '0')).join('');
-  return redirect('/' + role, sessionCookie(value + '.' + hex, sessionSeconds, url));
+  return redirect('/' + role + '/overview', sessionCookie(value + '.' + hex, sessionSeconds, url));
 }
 
 export default {
@@ -80,7 +80,7 @@ export default {
     if (request.method === 'GET' && path === '/styles.css') return response(assets.styles, 'text/css');
 
     const loginRole = /^\/login\/(company|applicant)$/.exec(path)?.[1];
-    const portal = /^\/(company|applicant)(?:\/(overview|jobs|privacy|rights))?$/.exec(path);
+    const portal = /^\/(company|applicant)(?:\/(overview|jobs|privacy|rights|insights))?$/.exec(path);
     const scriptRole = path === '/app.js' ? 'company' : path === '/candidate.js' ? 'applicant' : null;
 
     if (!env.DEMO_SESSION_SECRET) {
@@ -101,13 +101,13 @@ export default {
     }
     if (request.method === 'GET') {
       if (path === '/') return entryPage();
-      if (loginRole) return role === loginRole ? redirect('/' + role) : entryPage(loginRole);
+      if (loginRole) return role === loginRole ? redirect('/' + role + '/overview') : entryPage(loginRole);
       if (portal) {
         if (!role) return redirect('/login/' + portal[1]);
-        if (role !== portal[1]) return redirect('/' + role);
-        if (portal[2] === 'overview') return response(assets[role], 'text/html');
-        if ((role === 'company' && portal[2] === 'rights') || (role === 'applicant' && ['jobs','privacy'].includes(portal[2]))) {
-          return redirect('/' + role);
+        if (role !== portal[1] || !portal[2]) return redirect('/' + role + '/overview');
+        if (portal[2] === 'insights') return response(assets[role], 'text/html');
+        if ((role === 'company' && portal[2] === 'rights') || (role === 'applicant' && portal[2] === 'privacy')) {
+          return redirect('/' + role + '/overview');
         }
         return handleHiring(request, url, env, session);
       }

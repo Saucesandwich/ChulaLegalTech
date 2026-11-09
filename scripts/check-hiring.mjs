@@ -13,14 +13,14 @@ const post = (path, body, cookie = '') => request(path, {
 });
 async function signIn(role, cookie) {
   const reply = await post('/login/' + role, {}, cookie);
-  assert.equal(reply.headers.get('location'), '/' + role);
+  assert.equal(reply.headers.get('location'), '/' + role + '/overview');
   return reply.headers.get('set-cookie').split(';')[0];
 }
 const company = await signIn('company');
 const applicant = await signIn('applicant', company);
 const outsider = await signIn('company');
 const space = company.split('.')[1];
-assert.equal((await request('/company', { headers: { cookie: applicant } })).headers.get('location'), '/applicant');
+assert.equal((await request('/company/overview', { headers: { cookie: applicant } })).headers.get('location'), '/applicant/overview');
 const act = async (cookie, body, outcome = 'done') => {
   const reply = await post('/hiring', body, cookie);
   assert.equal(reply.status, 303);
@@ -41,11 +41,13 @@ const page = async (path, cookie) => {
   assert.equal(reply.status, 200);
   return reply.text();
 };
-assert.match(await page('company', company), /ภาพรวมการสรรหา/);
-assert.doesNotMatch(await page('company', company), /name="occupation"/);
-assert.match(await page('applicant?district=lat', applicant), /พบ 1 รายการ/);
+assert.match(await page('company/overview', company), /ภาพรวมการสรรหา/);
+assert.doesNotMatch(await page('company/overview', company), /name="occupation"/);
+assert.match(await page('applicant/overview', applicant), /ภาพรวมการหางาน/);
+assert.doesNotMatch(await page('applicant/overview', applicant), /name="q"/);
+assert.match(await page('applicant/jobs?district=lat', applicant), /พบ 1 รายการ/);
 await act(outsider, { action: 'close', job: warehouse }, 'blocked');
-assert.match(await page('applicant', applicant), /ยังขาดผลรับรอง/);
+assert.match(await page('applicant/jobs', applicant), /ยังขาดผลรับรอง/);
 await act(applicant, { action: 'apply', job: warehouse, ...screening }, 'blocked');
 for (const category of ['forklift', 'licence']) {
   await act(applicant, { action: 'verify', category });
@@ -66,7 +68,7 @@ await act(company, { action: 'case-result', job: security, result: 'clear', revi
 await act(applicant, { action: 'apply', job: security, ...screening });
 assert.match(await page('company/jobs', company), /ส่งใบสมัครแล้ว/);
 await act(company, { action: 'close', job: security });
-await page('company', company);
+await page('company/overview', company);
 assert.equal(env.DB.prepare('SELECT status FROM hiring_cases WHERE job_id = ?').bind(security).first(), null);
 await act(applicant, { action: 'apply', job: security, ...screening }, 'blocked');
 await act(applicant, { action: 'right-request', kind: 'erase' });
