@@ -127,7 +127,22 @@ Target a 3–5 minute walkthrough with no external accounts, network integration
 - The entire demo works with bundled fixtures and no application API calls.
 - Complete manual checks of the walkthrough, back navigation, mobile layouts, keyboard dialogs, and date-boundary follow-up cases. Use focused automated checks only for shared metric calculations and duplicate-event prevention if implementing logic tests.
 
-## 10. Deferred scope
+## 10. Thai and candidate experience extension
+
+The prototype now uses the working name **ปาท่องโก๋** and supports Thai and English. Thai is the default language, while a persistent header control switches the primary navigation, employer workflow, application records, and candidate experience to English.
+
+Add a candidate-facing “พื้นที่ของฉัน / My opportunity” workspace with:
+
+- a plain-language readiness journey that shows completed and upcoming actions;
+- job matches based on skills, location, and preferred working hours;
+- saved jobs and clear second-chance-friendly employer signals;
+- upcoming coaching and interview-preparation appointments;
+- a privacy view explaining which employer can access which information; and
+- direct access to a support coach when the person needs help.
+
+Candidate wording should remain supportive and avoid labels that define a person by their conviction history. The operational data model should expose only the minimum information the candidate needs, and any future evidence upload or employer sharing action must include purpose, access, and withdrawal information appropriate to the applicable legal basis.
+
+## 11. Deferred scope
 
 Leave authentication, real partner portals, messaging, document storage, legal-rule engines, government integrations, real consent/retention enforcement, databases, Power BI services, and tax-rule calculations outside this prototype.
 

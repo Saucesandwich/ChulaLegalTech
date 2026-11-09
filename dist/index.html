@@ -1,39 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A hiring readiness workspace for fair, evidence-based second-chance hiring." />
-  <title>ReStart Ready — Hiring confidence, case by case</title>
+  <meta name="description" content="ปาท่องโก๋ แพลตฟอร์มเชื่อมโอกาสการจ้างงานสำหรับผู้พ้นโทษและนายจ้าง" />
+  <title>ปาท่องโก๋ — โอกาสที่เติบโตไปด้วยกัน</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <aside class="sidebar" aria-label="Main navigation">
-    <a class="brand" href="#" aria-label="ReStart Ready home">
+    <a class="brand" href="#" aria-label="หน้าหลักปาท่องโก๋">
       <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
-      <span><strong>ReStart</strong><small>READY</small></span>
+      <span><strong>ปาท่องโก๋</strong><small>เติบโตไปด้วยกัน</small></span>
     </a>
     <nav>
-      <button class="nav-item active" data-view="overview"><span class="nav-icon">⌂</span>Overview</button>
-      <button class="nav-item" data-view="applications"><span class="nav-icon">▤</span>Applications <span class="nav-count">12</span></button>
-      <button class="nav-item" data-view="outcomes"><span class="nav-icon">↗</span>Outcomes</button>
+      <button class="nav-item active" data-view="overview" data-th="ภาพรวม HR" data-en="HR overview"><span class="nav-icon">⌂</span><span class="nav-label">ภาพรวม HR</span></button>
+      <button class="nav-item" data-view="applications" data-th="ใบสมัคร" data-en="Applications"><span class="nav-icon">▤</span><span class="nav-label">ใบสมัคร</span> <span class="nav-count">12</span></button>
+      <button class="nav-item" data-view="outcomes" data-th="ผลลัพธ์" data-en="Outcomes"><span class="nav-icon">↗</span><span class="nav-label">ผลลัพธ์</span></button>
+      <button class="nav-item applicant-link" data-view="applicant" data-th="พื้นที่ของฉัน" data-en="My opportunity"><span class="nav-icon">◎</span><span class="nav-label">พื้นที่ของฉัน</span><span class="new-badge">ใหม่</span></button>
     </nav>
     <div class="sidebar-section">
-      <p>WORKSPACE</p>
-      <button class="nav-item muted"><span class="nav-icon">✓</span>Rule library</button>
-      <button class="nav-item muted"><span class="nav-icon">◷</span>Data tasks <span class="nav-count alert">3</span></button>
-      <button class="nav-item muted"><span class="nav-icon">◇</span>Partners</button>
+      <p data-th="เครื่องมือ" data-en="WORKSPACE">เครื่องมือ</p>
+      <button class="nav-item muted"><span class="nav-icon">✓</span><span data-th="คลังกฎที่ตรวจแล้ว" data-en="Reviewed rules">คลังกฎที่ตรวจแล้ว</span></button>
+      <button class="nav-item muted"><span class="nav-icon">◷</span><span data-th="งานด้านข้อมูล" data-en="Data tasks">งานด้านข้อมูล</span> <span class="nav-count alert">3</span></button>
+      <button class="nav-item muted"><span class="nav-icon">◇</span><span data-th="ภาคีเครือข่าย" data-en="Partners">ภาคีเครือข่าย</span></button>
     </div>
     <div class="pilot-card">
       <div class="pilot-icon">✦</div>
-      <strong>Pilot workspace</strong>
-      <p>Synthetic data · reviewed scope</p>
+      <strong data-th="พื้นที่ทดลอง" data-en="Pilot workspace">พื้นที่ทดลอง</strong>
+      <p data-th="ข้อมูลจำลอง · ขอบเขตที่ตรวจแล้ว" data-en="Synthetic data · reviewed scope">ข้อมูลจำลอง · ขอบเขตที่ตรวจแล้ว</p>
       <div class="progress"><span></span></div>
-      <small>Week 6 of 12</small>
+      <small data-th="สัปดาห์ที่ 6 จาก 12" data-en="Week 6 of 12">สัปดาห์ที่ 6 จาก 12</small>
     </div>
     <div class="user-card">
       <div class="avatar">PN</div>
-      <div><strong>Pat N.</strong><small>HR Manager</small></div>
+      <div><strong>แพท</strong><small data-th="ผู้จัดการฝ่ายบุคคล" data-en="HR Manager">ผู้จัดการฝ่ายบุคคล</small></div>
       <span>⋮</span>
     </div>
   </aside>
@@ -41,65 +42,66 @@
   <main>
     <header class="topbar">
       <button class="menu-button" aria-label="Open menu">☰</button>
-      <div class="breadcrumb"><span>Acme Logistics</span><b>/</b><strong id="page-name">Overview</strong></div>
+      <div class="breadcrumb"><span>Acme Logistics</span><b>/</b><strong id="page-name">ภาพรวม HR</strong></div>
       <div class="header-actions">
+        <button class="language-toggle" id="language-toggle" aria-label="Switch language"><b>TH</b><span>EN</span></button>
         <button class="icon-button" aria-label="Search">⌕</button>
         <button class="icon-button notification" aria-label="Notifications">♢<span></span></button>
-        <button class="primary-button" id="add-application">＋ New application</button>
+        <button class="primary-button" id="add-application" data-th="＋ ใบสมัครใหม่" data-en="＋ New application">＋ ใบสมัครใหม่</button>
       </div>
     </header>
 
     <section class="view active" id="overview-view">
       <div class="page-heading">
         <div>
-          <p class="eyebrow">MONDAY, 9 NOVEMBER</p>
-          <h1>Good morning, Pat.</h1>
-          <p>Here’s what needs your team’s attention today.</p>
+          <p class="eyebrow" data-th="วันจันทร์ที่ 9 พฤศจิกายน" data-en="MONDAY, 9 NOVEMBER">วันจันทร์ที่ 9 พฤศจิกายน</p>
+          <h1 data-th="สวัสดีตอนเช้า แพท" data-en="Good morning, Pat.">สวัสดีตอนเช้า แพท</h1>
+          <p data-th="งานที่ทีมของคุณควรจัดการในวันนี้" data-en="Here’s what needs your team’s attention today.">งานที่ทีมของคุณควรจัดการในวันนี้</p>
         </div>
-        <div class="scope-note"><span>i</span><div><strong>Prototype workspace</strong><small>All people and records shown are synthetic.</small></div></div>
+        <div class="scope-note"><span>i</span><div><strong data-th="พื้นที่ต้นแบบ" data-en="Prototype workspace">พื้นที่ต้นแบบ</strong><small data-th="บุคคลและข้อมูลทั้งหมดเป็นข้อมูลจำลอง" data-en="All people and records shown are synthetic.">บุคคลและข้อมูลทั้งหมดเป็นข้อมูลจำลอง</small></div></div>
       </div>
 
       <div class="metric-grid">
         <article class="metric-card accent-orange">
           <div class="metric-top"><span class="metric-icon">!</span><span class="trend warm">+3 this week</span></div>
-          <strong>7</strong><p>Need your action</p><small>2 due today</small>
+          <strong>7</strong><p data-th="รอการดำเนินการจากคุณ" data-en="Need your action">รอการดำเนินการจากคุณ</p><small data-th="2 งานครบกำหนดวันนี้" data-en="2 due today">2 งานครบกำหนดวันนี้</small>
         </article>
         <article class="metric-card accent-blue">
           <div class="metric-top"><span class="metric-icon">◫</span><span class="trend">−1 this week</span></div>
-          <strong>4</strong><p>Waiting on partners</p><small>Avg. wait 2.4 days</small>
+          <strong>4</strong><p data-th="รอภาคีเครือข่าย" data-en="Waiting on partners">รอภาคีเครือข่าย</p><small data-th="ระยะเวลารอเฉลี่ย 2.4 วัน" data-en="Avg. wait 2.4 days">ระยะเวลารอเฉลี่ย 2.4 วัน</small>
         </article>
         <article class="metric-card accent-green">
           <div class="metric-top"><span class="metric-icon">✓</span><span class="trend good">+18%</span></div>
-          <strong>12</strong><p>Ready to progress</p><small>Across 5 open roles</small>
+          <strong>12</strong><p data-th="พร้อมดำเนินการต่อ" data-en="Ready to progress">พร้อมดำเนินการต่อ</p><small data-th="จาก 5 ตำแหน่งงาน" data-en="Across 5 open roles">จาก 5 ตำแหน่งงาน</small>
         </article>
         <article class="metric-card accent-purple">
           <div class="metric-top"><span class="metric-icon">◷</span><span class="trend warm">3 upcoming</span></div>
-          <strong>2</strong><p>Data tasks overdue</p><small>Oldest by 3 days</small>
+          <strong>2</strong><p data-th="งานด้านข้อมูลเกินกำหนด" data-en="Data tasks overdue">งานด้านข้อมูลเกินกำหนด</p><small data-th="เกินกำหนดสูงสุด 3 วัน" data-en="Oldest by 3 days">เกินกำหนดสูงสุด 3 วัน</small>
         </article>
       </div>
 
       <div class="main-grid">
         <article class="panel action-panel">
           <div class="panel-heading">
-            <div><h2>Priority actions</h2><p>Ordered by urgency and impact</p></div>
-            <button class="text-button" data-go="applications">View all 12 →</button>
+            <div><h2 data-th="งานสำคัญ" data-en="Priority actions">งานสำคัญ</h2><p data-th="เรียงตามความเร่งด่วนและผลกระทบ" data-en="Ordered by urgency and impact">เรียงตามความเร่งด่วนและผลกระทบ</p></div>
+            <button class="text-button" data-go="applications" data-th="ดูทั้งหมด 12 รายการ →" data-en="View all 12 →">ดูทั้งหมด 12 รายการ →</button>
           </div>
           <div class="action-list" id="priority-list"></div>
         </article>
 
         <article class="panel funnel-panel">
           <div class="panel-heading">
-            <div><h2>Hiring funnel</h2><p>Active applications · last 90 days</p></div>
+            <div><h2 data-th="เส้นทางการจ้างงาน" data-en="Hiring funnel">เส้นทางการจ้างงาน</h2><p data-th="ใบสมัครที่กำลังดำเนินการ · 90 วันที่ผ่านมา" data-en="Active applications · last 90 days">ใบสมัครที่กำลังดำเนินการ · 90 วันที่ผ่านมา</p></div>
             <button class="more-button" aria-label="More options">•••</button>
           </div>
           <div class="funnel" aria-label="Hiring funnel">
-            <div><span><b>32</b><small>Referred</small></span></div>
-            <div><span><b>26</b><small>Evidence ready</small></span></div>
-            <div><span><b>21</b><small>Assessed</small></span></div>
-            <div><span><b>15</b><small>Interviewed</small></span></div>
-            <div><span><b>9</b><small>Started</small></span></div>
+            <div><span><b>32</b><small data-th="ได้รับการแนะนำ" data-en="Referred">ได้รับการแนะนำ</small></span></div>
+            <div><span><b>26</b><small data-th="หลักฐานครบ" data-en="Evidence ready">หลักฐานครบ</small></span></div>
+            <div><span><b>21</b><small data-th="ประเมินแล้ว" data-en="Assessed">ประเมินแล้ว</small></span></div>
+            <div><span><b>15</b><small data-th="สัมภาษณ์แล้ว" data-en="Interviewed">สัมภาษณ์แล้ว</small></span></div>
+            <div><span><b>9</b><small data-th="เริ่มงานแล้ว" data-en="Started">เริ่มงานแล้ว</small></span></div>
           </div>
-          <div class="funnel-note"><span class="dot orange"></span><div><strong>Largest delay: evidence collection</strong><small>Median 3.2 days · 5 applications waiting</small></div></div>
+          <div class="funnel-note"><span class="dot orange"></span><div><strong data-th="จุดติดขัดหลัก: การรวบรวมหลักฐาน" data-en="Largest delay: evidence collection">จุดติดขัดหลัก: การรวบรวมหลักฐาน</strong><small data-th="ค่ากลาง 3.2 วัน · มี 5 ใบสมัครกำลังรอ" data-en="Median 3.2 days · 5 applications waiting">ค่ากลาง 3.2 วัน · มี 5 ใบสมัครกำลังรอ</small></div></div>
         </article>
       </div>
 
@@ -127,27 +129,27 @@
 
     <section class="view" id="applications-view">
       <div class="page-heading compact">
-        <div><p class="eyebrow">CASE WORKSPACE</p><h1>Applications</h1><p>Every case has a clear status, owner and next action.</p></div>
+        <div><p class="eyebrow" data-th="พื้นที่จัดการเคส" data-en="CASE WORKSPACE">พื้นที่จัดการเคส</p><h1 data-th="ใบสมัคร" data-en="Applications">ใบสมัคร</h1><p data-th="ทุกเคสมีสถานะ ผู้รับผิดชอบ และขั้นตอนถัดไปที่ชัดเจน" data-en="Every case has a clear status, owner and next action.">ทุกเคสมีสถานะ ผู้รับผิดชอบ และขั้นตอนถัดไปที่ชัดเจน</p></div>
       </div>
       <div class="panel table-panel">
         <div class="table-toolbar">
           <label class="search-box">⌕ <input id="application-search" type="search" placeholder="Search name, role or ID" /></label>
           <div class="filter-row">
-            <button class="filter active" data-filter="all">All <span>12</span></button>
-            <button class="filter" data-filter="action">Needs action <span>7</span></button>
-            <button class="filter" data-filter="waiting">Waiting <span>4</span></button>
-            <button class="filter" data-filter="ready">Ready <span>1</span></button>
+            <button class="filter active" data-filter="all"><i data-th="ทั้งหมด" data-en="All">ทั้งหมด</i> <span>12</span></button>
+            <button class="filter" data-filter="action"><i data-th="ต้องดำเนินการ" data-en="Needs action">ต้องดำเนินการ</i> <span>7</span></button>
+            <button class="filter" data-filter="waiting"><i data-th="กำลังรอ" data-en="Waiting">กำลังรอ</i> <span>4</span></button>
+            <button class="filter" data-filter="ready"><i data-th="พร้อม" data-en="Ready">พร้อม</i> <span>1</span></button>
           </div>
         </div>
-        <div class="table-head"><span>APPLICANT & ROLE</span><span>READINESS</span><span>BLOCKER / NEXT ACTION</span><span>OWNER</span><span>DUE</span><span></span></div>
+        <div class="table-head"><span data-th="ผู้สมัครและตำแหน่ง" data-en="APPLICANT & ROLE">ผู้สมัครและตำแหน่ง</span><span data-th="ความพร้อม" data-en="READINESS">ความพร้อม</span><span data-th="ปัญหา / ขั้นตอนถัดไป" data-en="BLOCKER / NEXT ACTION">ปัญหา / ขั้นตอนถัดไป</span><span data-th="ผู้รับผิดชอบ" data-en="OWNER">ผู้รับผิดชอบ</span><span data-th="กำหนด" data-en="DUE">กำหนด</span><span></span></div>
         <div id="application-table"></div>
       </div>
     </section>
 
     <section class="view" id="outcomes-view">
       <div class="page-heading compact">
-        <div><p class="eyebrow">PILOT RESULTS</p><h1>Outcomes</h1><p>Track completed hiring and sustained employment with honest denominators.</p></div>
-        <button class="secondary-button">Export pilot report</button>
+        <div><p class="eyebrow" data-th="ผลการทดลอง" data-en="PILOT RESULTS">ผลการทดลอง</p><h1 data-th="ผลลัพธ์การจ้างงาน" data-en="Outcomes">ผลลัพธ์การจ้างงาน</h1><p data-th="ติดตามการเริ่มงานและการทำงานต่อเนื่องโดยแสดงฐานคำนวณอย่างโปร่งใส" data-en="Track completed hiring and sustained employment with honest denominators.">ติดตามการเริ่มงานและการทำงานต่อเนื่องโดยแสดงฐานคำนวณอย่างโปร่งใส</p></div>
+        <button class="secondary-button" data-th="ส่งออกรายงานทดลอง" data-en="Export pilot report">ส่งออกรายงานทดลอง</button>
       </div>
       <div class="metric-grid outcome-metrics">
         <article class="metric-card"><small>DOCUMENTED JOB STARTS</small><strong>18</strong><p><span class="up">↑ 20%</span> vs prior period</p></article>
@@ -172,6 +174,54 @@
           <div class="impact-row"><span class="impact-icon orange">↑</span><div><strong>17% improvement</strong><p>in partner evidence turnaround</p></div></div>
           <p class="method-note"><span>i</span> Early pilot signals from synthetic prototype data. Replace with observed pilot results before external claims.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="view applicant-view" id="applicant-view">
+      <div class="applicant-hero">
+        <div>
+          <p class="eyebrow" data-th="พื้นที่ของฉัน" data-en="MY OPPORTUNITY">พื้นที่ของฉัน</p>
+          <h1 data-th="สวัสดี สมชาย — ไปต่อด้วยกันนะ" data-en="Hello Somchai — let’s take the next step together">สวัสดี สมชาย — ไปต่อด้วยกันนะ</h1>
+          <p data-th="ดูความพร้อม งานที่เหมาะกับคุณ และเลือกได้ว่าใครเข้าถึงข้อมูลของคุณ" data-en="See your readiness, matched jobs, and choose who can access your information.">ดูความพร้อม งานที่เหมาะกับคุณ และเลือกได้ว่าใครเข้าถึงข้อมูลของคุณ</p>
+        </div>
+        <div class="readiness-ring"><span><b>75%</b><small data-th="พร้อมสมัครงาน" data-en="job ready">พร้อมสมัครงาน</small></span></div>
+      </div>
+
+      <div class="applicant-layout">
+        <div class="applicant-main">
+          <article class="panel journey-card">
+            <div class="panel-heading"><div><h2 data-th="ขั้นตอนต่อไปของคุณ" data-en="Your next steps">ขั้นตอนต่อไปของคุณ</h2><p data-th="ทำทีละขั้น ไม่ต้องจัดการทุกอย่างคนเดียว" data-en="One step at a time — you do not have to manage this alone.">ทำทีละขั้น ไม่ต้องจัดการทุกอย่างคนเดียว</p></div><span class="tag amber">2 <span data-th="งานที่ต้องทำ" data-en="actions">งานที่ต้องทำ</span></span></div>
+            <div class="journey-list">
+              <div class="journey-item done"><span>✓</span><div><strong data-th="ยืนยันข้อมูลประจำตัว" data-en="Confirm your identity">ยืนยันข้อมูลประจำตัว</strong><p data-th="ตรวจสอบโดย CARE บางนา · 7 พ.ย." data-en="Verified by CARE Bang Na · 7 Nov">ตรวจสอบโดย CARE บางนา · 7 พ.ย.</p></div><b data-th="เสร็จแล้ว" data-en="Done">เสร็จแล้ว</b></div>
+              <button class="journey-item current" id="upload-training"><span>2</span><div><strong data-th="เพิ่มหลักฐานการอบรมรถยก" data-en="Add forklift training evidence">เพิ่มหลักฐานการอบรมรถยก</strong><p data-th="ช่วยให้นายจ้างพิจารณาตำแหน่งคลังสินค้าได้" data-en="Helps employers consider you for warehouse roles.">ช่วยให้นายจ้างพิจารณาตำแหน่งคลังสินค้าได้</p></div><b data-th="เพิ่มข้อมูล →" data-en="Add evidence →">เพิ่มข้อมูล →</b></button>
+              <div class="journey-item"><span>3</span><div><strong data-th="เตรียมสัมภาษณ์" data-en="Prepare for interview">เตรียมสัมภาษณ์</strong><p data-th="พี่เลี้ยงจะช่วยทบทวนคำถามกับคุณ" data-en="Your coach will help you practise common questions.">พี่เลี้ยงจะช่วยทบทวนคำถามกับคุณ</p></div><b data-th="รอขั้นตอนก่อนหน้า" data-en="Up next">รอขั้นตอนก่อนหน้า</b></div>
+            </div>
+          </article>
+
+          <article class="panel jobs-card">
+            <div class="panel-heading"><div><h2 data-th="งานที่เหมาะกับคุณ" data-en="Jobs matched to you">งานที่เหมาะกับคุณ</h2><p data-th="จับคู่จากทักษะ สถานที่ และเวลาทำงานที่คุณสะดวก" data-en="Matched from your skills, location, and preferred hours.">จับคู่จากทักษะ สถานที่ และเวลาทำงานที่คุณสะดวก</p></div><button class="text-button" data-th="ดูทั้งหมด 6 งาน →" data-en="View all 6 jobs →">ดูทั้งหมด 6 งาน →</button></div>
+            <div class="job-list">
+              <article class="job-match"><div class="company-logo">AC</div><div><span class="match-score">92% match</span><h3 data-th="พนักงานคลังสินค้า" data-en="Warehouse Associate">พนักงานคลังสินค้า</h3><p>Acme Logistics · บางนา · ฿14,500–17,000</p><div><span data-th="กะกลางวัน" data-en="Day shift">กะกลางวัน</span><span data-th="มีรถรับส่ง" data-en="Staff shuttle">มีรถรับส่ง</span><span data-th="ยินดีรับผู้เริ่มต้นใหม่" data-en="Second-chance friendly">ยินดีรับผู้เริ่มต้นใหม่</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
+              <article class="job-match"><div class="company-logo alt">SP</div><div><span class="match-score">84% match</span><h3 data-th="พนักงานแพ็กสินค้า" data-en="Packing Operator">พนักงานแพ็กสินค้า</h3><p>Siam Pack · พระโขนง · ฿13,500–15,500</p><div><span data-th="ไม่ต้องมีประสบการณ์" data-en="No experience required">ไม่ต้องมีประสบการณ์</span><span data-th="มีอบรม" data-en="Training provided">มีอบรม</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
+            </div>
+          </article>
+        </div>
+
+        <aside class="applicant-side">
+          <article class="panel appointment-card">
+            <p class="eyebrow" data-th="นัดหมายถัดไป" data-en="NEXT APPOINTMENT">นัดหมายถัดไป</p>
+            <div class="appointment-date"><b>12</b><span>พ.ย.<small>10:30 น.</small></span></div>
+            <h3 data-th="เตรียมความพร้อมก่อนสัมภาษณ์" data-en="Interview preparation">เตรียมความพร้อมก่อนสัมภาษณ์</h3><p data-th="กับคุณเมย์ · CARE บางนา" data-en="With May · CARE Bang Na">กับคุณเมย์ · CARE บางนา</p>
+            <button class="secondary-button full" id="appointment-detail" data-th="ดูรายละเอียด" data-en="View details">ดูรายละเอียด</button>
+          </article>
+          <article class="panel privacy-card">
+            <span class="privacy-icon">⌾</span><h3 data-th="ข้อมูลของคุณ คุณเป็นคนเลือก" data-en="Your information, your choice">ข้อมูลของคุณ คุณเป็นคนเลือก</h3>
+            <p data-th="ดูว่าใครเข้าถึงข้อมูลอะไร และถอนการอนุญาตได้ทุกเมื่อ" data-en="See who can access what and withdraw permission when applicable.">ดูว่าใครเข้าถึงข้อมูลอะไร และถอนการอนุญาตได้ทุกเมื่อ</p>
+            <div><span data-th="แชร์กับ Acme Logistics" data-en="Shared with Acme Logistics">แชร์กับ Acme Logistics</span><b data-th="3 รายการ" data-en="3 items">3 รายการ</b></div>
+            <button class="text-button" id="privacy-manage" data-th="จัดการการเข้าถึงข้อมูล →" data-en="Manage access →">จัดการการเข้าถึงข้อมูล →</button>
+          </article>
+          <article class="support-card"><span>♡</span><div><strong data-th="ต้องการความช่วยเหลือ?" data-en="Need help?">ต้องการความช่วยเหลือ?</strong><p data-th="ติดต่อพี่เลี้ยงของคุณได้โดยไม่เสียค่าใช้จ่าย" data-en="Contact your support coach at no cost.">ติดต่อพี่เลี้ยงของคุณได้โดยไม่เสียค่าใช้จ่าย</p></div><button id="contact-coach" data-th="ติดต่อ" data-en="Contact">ติดต่อ</button></article>
+        </aside>
       </div>
     </section>
   </main>
