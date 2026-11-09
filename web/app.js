@@ -61,7 +61,7 @@ function renderTable() {
     <div class="person-cell"><span class="initials">${a.initials}</span><div><strong>${localized(a,'name')}</strong><small>${a.id} · ${localized(a,'role')}</small></div></div>
     <div class="readiness"><i style="--score:${a.score}%;--bar:${a.color}"></i><b>${a.score}%</b></div>
     <div class="next-cell"><strong>${localized(a,'issue')}</strong><small>${localized(a,'next')}</small></div>
-    <div class="owner-cell"><span class="avatar tiny">${a.ownerInitials}</span>${a.owner}</div>
+    <div class="owner-cell"><span class="avatar tiny">${a.ownerInitials}</span>${currentLang === 'th' ? ({'May S.':'เมย์','Pat N.':'แพท',CARE:'ศูนย์แคร์',Legal:'ฝ่ายกฎหมาย',Restart:'รีสตาร์ต'})[a.owner] : a.owner}</div>
     <div class="due-cell">${localized(a,'due')}</div><span class="row-arrow">›</span>
   </div>`).join('') : `<div class="empty-state">${currentLang === 'th' ? 'ไม่พบใบสมัครที่ตรงกับตัวกรอง' : 'No applications match this view.'}</div>`;
 }
@@ -131,7 +131,6 @@ document.querySelector('#application-search').addEventListener('input', renderTa
 document.querySelector('#close-drawer').addEventListener('click', closeDrawer);
 document.querySelector('#drawer-backdrop').addEventListener('click', closeDrawer);
 document.querySelector('.menu-button').addEventListener('click', () => document.querySelector('.sidebar').classList.toggle('open'));
-document.querySelector('#add-application').addEventListener('click', () => { switchView('applications'); document.querySelector('#application-search').focus(); });
 document.querySelector('#language-toggle').addEventListener('click', () => applyLanguage(currentLang === 'th' ? 'en' : 'th'));
 document.querySelector('#mark-requested').addEventListener('click', e => {
   e.currentTarget.textContent = currentLang === 'th' ? '✓ ส่งคำขอแล้ว' : '✓ Request sent'; e.currentTarget.disabled = true;

@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="ปาท่องโก๋ แพลตฟอร์มเชื่อมโอกาสการจ้างงานสำหรับผู้พ้นโทษและนายจ้าง" />
   <title>พื้นที่ผู้สมัคร · ปาท่องโก๋</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=4" />
 </head>
 <body class="candidate-shell">
   <main>
     <header class="topbar">
       <a class="portal-brand" href="/applicant">ปาท่องโก๋</a>
-      <div class="header-actions"><button class="language-toggle" id="language-toggle" aria-label="TH / EN"><b>TH</b><span>EN</span></button><form method="post" action="/logout"><button class="secondary-button" data-th="ออกจากระบบ" data-en="Sign out">ออกจากระบบ</button></form></div>
+      <div class="header-actions"><a class="workflow-link secondary-button" href="/applicant/jobs#verify" data-th="หางานและขอรับรอง" data-en="Jobs and verification">หางานและขอรับรอง</a><button class="language-toggle" id="language-toggle" aria-label="TH / EN"><b>TH</b><span>EN</span></button><form method="post" action="/logout"><button class="secondary-button" data-th="ออกจากระบบ" data-en="Sign out">ออกจากระบบ</button></form></div>
     </header>
     <section class="view active applicant-view" id="applicant-view">
       <div class="applicant-hero">
@@ -37,8 +37,8 @@
           <article class="panel jobs-card">
             <div class="panel-heading"><div><h2 data-th="งานที่เหมาะกับคุณ" data-en="Jobs matched to you">งานที่เหมาะกับคุณ</h2><p data-th="จับคู่จากทักษะ สถานที่ และเวลาทำงานที่คุณสะดวก" data-en="Matched from your skills, location, and preferred hours.">จับคู่จากทักษะ สถานที่ และเวลาทำงานที่คุณสะดวก</p></div></div>
             <div class="job-list">
-              <article class="job-match"><div class="company-logo">AC</div><div><h3 data-th="พนักงานคลังสินค้า" data-en="Warehouse Associate">พนักงานคลังสินค้า</h3><p>Acme Logistics · บางนา · ฿14,500–17,000</p><div><span data-th="กะกลางวัน" data-en="Day shift">กะกลางวัน</span><span data-th="มีรถรับส่ง" data-en="Staff shuttle">มีรถรับส่ง</span><span data-th="ยินดีรับผู้เริ่มต้นใหม่" data-en="Second-chance friendly">ยินดีรับผู้เริ่มต้นใหม่</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
-              <article class="job-match"><div class="company-logo alt">SP</div><div><h3 data-th="พนักงานแพ็กสินค้า" data-en="Packing Operator">พนักงานแพ็กสินค้า</h3><p>Siam Pack · พระโขนง · ฿13,500–15,500</p><div><span data-th="ไม่ต้องมีประสบการณ์" data-en="No experience required">ไม่ต้องมีประสบการณ์</span><span data-th="มีอบรม" data-en="Training provided">มีอบรม</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
+              <article class="job-match"><div class="company-logo">AC</div><div><h3 data-th="พนักงานคลังสินค้า" data-en="Warehouse Associate">พนักงานคลังสินค้า</h3><p>แอคมี โลจิสติกส์ · บางนา · ฿14,500–17,000</p><div><span data-th="กะกลางวัน" data-en="Day shift">กะกลางวัน</span><span data-th="มีรถรับส่ง" data-en="Staff shuttle">มีรถรับส่ง</span><span data-th="ยินดีรับผู้เริ่มต้นใหม่" data-en="Second-chance friendly">ยินดีรับผู้เริ่มต้นใหม่</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
+              <article class="job-match"><div class="company-logo alt">SP</div><div><h3 data-th="พนักงานแพ็กสินค้า" data-en="Packing Operator">พนักงานแพ็กสินค้า</h3><p>สยามแพ็ก · พระโขนง · ฿13,500–15,500</p><div><span data-th="ไม่ต้องมีประสบการณ์" data-en="No experience required">ไม่ต้องมีประสบการณ์</span><span data-th="มีอบรม" data-en="Training provided">มีอบรม</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
             </div>
           </article>
         </div>
@@ -66,6 +66,6 @@
     <p id="candidate-detail"></p>
     <form method="dialog"><button class="primary-button" data-th="ปิด" data-en="Close">ปิด</button></form>
   </dialog>
-  <script src="candidate.js"></script>
+  <script src="/candidate.js?v=4"></script>
 </body>
 </html>
