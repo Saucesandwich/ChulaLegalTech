@@ -127,9 +127,41 @@ Target a 3–5 minute walkthrough with no external accounts, network integration
 - The entire demo works with bundled fixtures and no application API calls.
 - Complete manual checks of the walkthrough, back navigation, mobile layouts, keyboard dialogs, and date-boundary follow-up cases. Use focused automated checks only for shared metric calculations and duplicate-event prevention if implementing logic tests.
 
-## 10. Deferred scope
+## 10. Thai and candidate experience extension
 
-Leave authentication, real partner portals, messaging, document storage, legal-rule engines, government integrations, real consent/retention enforcement, databases, Power BI services, and tax-rule calculations outside this prototype.
+The prototype now uses the working name **ปาท่องโก๋** and supports Thai and English. Thai is the default language, while a persistent header control switches the primary navigation, employer workflow, application records, and candidate experience to English.
+
+Add a candidate-facing “พื้นที่ของฉัน / My opportunity” workspace with:
+
+- a plain-language readiness journey that shows completed and upcoming actions;
+- job matches based on skills, location, and preferred working hours;
+- saved jobs and clear second-chance-friendly employer signals;
+- upcoming coaching and interview-preparation appointments;
+- a privacy view explaining which employer can access which information; and
+- direct access to a support coach when the person needs help.
+
+Candidate wording should remain supportive and avoid labels that define a person by their conviction history. The operational data model should expose only the minimum information the candidate needs, and any future evidence upload or employer sharing action must include purpose, access, and withdrawal information appropriate to the applicable legal basis.
+
+## 11. Pain points and separated demo accounts
+
+The primary brief (pp. 1, 4–6) and survey / solution notes (pp. 1–4) identify the following product needs.
+
+| Pain point | Company workspace | Applicant workspace |
+| --- | --- | --- |
+| Occupational requirements are hard to interpret; applicants miss opportunities | Show assessment scope and next review step for each role | Show illustrative opportunities and preparation steps |
+| Skills and work history are hard to share and verify | Show evidence status, source and verifier | Explain which training evidence is missing |
+| Collection purpose and retention are unclear; applicants lack visibility into sharing | Show example data handling tasks and deadlines | List the sample information shared with the employer |
+| Individual work location and shift conditions can be missed | Flag work arrangements for review | Show role and shift information in job cards |
+| Employer networks are limited, coordination is manual and retention support is uneven | Show action owners and outcome follow-up | Show opportunities, sample appointment and support coach |
+| Employers are uncertain about applicable tax incentives | Defer tax calculation pending current legal review | — |
+
+The survey notes report different respondent bases. Use them as exploratory evidence, and confirm question-level denominators before publishing percentages.
+
+Give each audience a distinct login, portal and script. Verify credentials and signed sessions server-side. The shared accounts are for synthetic demonstration data. Production would require individual identities and organization- and applicant-level data permissions.
+
+## 12. Deferred scope
+
+Leave production identity management, real partner portals, messaging, document storage, legal-rule engines, government integrations, real consent/retention enforcement, databases, Power BI services, and tax-rule calculations outside this prototype.
 
 Tax benefits and employer cost savings may become an optional later UI scenario. They are not needed for the core pitch flow. Any later tax screen should display explicit illustrative assumptions and reviewed rule dates rather than promise eligibility.
 

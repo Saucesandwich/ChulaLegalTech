@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ปาท่องโก๋ แพลตฟอร์มเชื่อมโอกาสการจ้างงานสำหรับผู้พ้นโทษและนายจ้าง" />
+  <title>ปาท่องโก๋ — โอกาสที่เติบโตไปด้วยกัน</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="/company" aria-label="หน้าหลักปาท่องโก๋">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
+      <span><strong>ปาท่องโก๋</strong><small>เติบโตไปด้วยกัน</small></span>
+    </a>
+    <nav>
+      <button class="nav-item active" data-view="overview" data-th="ภาพรวม HR" data-en="HR overview"><span class="nav-icon">⌂</span><span class="nav-label">ภาพรวม HR</span></button>
+      <button class="nav-item" data-view="applications" data-th="ใบสมัคร" data-en="Applications"><span class="nav-icon">▤</span><span class="nav-label">ใบสมัคร</span> <span class="nav-count">12</span></button>
+      <button class="nav-item" data-view="outcomes" data-th="ผลลัพธ์" data-en="Outcomes"><span class="nav-icon">↗</span><span class="nav-label">ผลลัพธ์</span></button>
+    </nav>
+    <div class="sidebar-section">
+      <p data-th="เครื่องมือ" data-en="WORKSPACE">เครื่องมือ</p>
+      <button class="nav-item muted"><span class="nav-icon">✓</span><span data-th="คลังกฎที่ตรวจแล้ว" data-en="Reviewed rules">คลังกฎที่ตรวจแล้ว</span></button>
+      <button class="nav-item muted"><span class="nav-icon">◷</span><span data-th="งานด้านข้อมูล" data-en="Data tasks">งานด้านข้อมูล</span> <span class="nav-count alert">3</span></button>
+      <button class="nav-item muted"><span class="nav-icon">◇</span><span data-th="ภาคีเครือข่าย" data-en="Partners">ภาคีเครือข่าย</span></button>
+    </div>
+    <div class="pilot-card">
+      <div class="pilot-icon">✦</div>
+      <strong data-th="พื้นที่ทดลอง" data-en="Pilot workspace">พื้นที่ทดลอง</strong>
+      <p data-th="ข้อมูลจำลอง · ขอบเขตที่ตรวจแล้ว" data-en="Synthetic data · reviewed scope">ข้อมูลจำลอง · ขอบเขตที่ตรวจแล้ว</p>
+      <div class="progress"><span></span></div>
+      <small data-th="สัปดาห์ที่ 6 จาก 12" data-en="Week 6 of 12">สัปดาห์ที่ 6 จาก 12</small>
+    </div>
+    <div class="user-card">
+      <div class="avatar">PN</div>
+      <div><strong>แพท</strong><small data-th="ผู้จัดการฝ่ายบุคคล" data-en="HR Manager">ผู้จัดการฝ่ายบุคคล</small></div>
+      <span>⋮</span>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <button class="menu-button" aria-label="Open menu">☰</button>
+      <div class="breadcrumb"><span>Acme Logistics</span><b>/</b><strong id="page-name">ภาพรวม HR</strong></div>
+      <div class="header-actions">
+        <form method="post" action="/logout"><button class="secondary-button" data-th="ออกจากระบบ" data-en="Sign out">ออกจากระบบ</button></form>
+        <button class="language-toggle" id="language-toggle" aria-label="Switch language"><b>TH</b><span>EN</span></button>
+        <button class="icon-button" aria-label="Search">⌕</button>
+        <button class="icon-button notification" aria-label="Notifications">♢<span></span></button>
+        <button class="primary-button" id="add-application" data-th="＋ ใบสมัครใหม่" data-en="＋ New application">＋ ใบสมัครใหม่</button>
+      </div>
+    </header>
+
+    <section class="view active" id="overview-view">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow" data-th="วันจันทร์ที่ 9 พฤศจิกายน" data-en="MONDAY, 9 NOVEMBER">วันจันทร์ที่ 9 พฤศจิกายน</p>
+          <h1 data-th="สวัสดีตอนเช้า แพท" data-en="Good morning, Pat.">สวัสดีตอนเช้า แพท</h1>
+          <p data-th="งานที่ทีมของคุณควรจัดการในวันนี้" data-en="Here’s what needs your team’s attention today.">งานที่ทีมของคุณควรจัดการในวันนี้</p>
+        </div>
+        <div class="scope-note"><span>i</span><div><strong data-th="พื้นที่ต้นแบบ" data-en="Prototype workspace">พื้นที่ต้นแบบ</strong><small data-th="บุคคลและข้อมูลทั้งหมดเป็นข้อมูลจำลอง" data-en="All people and records shown are synthetic.">บุคคลและข้อมูลทั้งหมดเป็นข้อมูลจำลอง</small></div></div>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric-card accent-orange">
+          <div class="metric-top"><span class="metric-icon">!</span><span class="trend warm">+3 this week</span></div>
+          <strong>7</strong><p data-th="รอการดำเนินการจากคุณ" data-en="Need your action">รอการดำเนินการจากคุณ</p><small data-th="2 งานครบกำหนดวันนี้" data-en="2 due today">2 งานครบกำหนดวันนี้</small>
+        </article>
+        <article class="metric-card accent-blue">
+          <div class="metric-top"><span class="metric-icon">◫</span><span class="trend">−1 this week</span></div>
+          <strong>4</strong><p data-th="รอภาคีเครือข่าย" data-en="Waiting on partners">รอภาคีเครือข่าย</p><small data-th="ระยะเวลารอเฉลี่ย 2.4 วัน" data-en="Avg. wait 2.4 days">ระยะเวลารอเฉลี่ย 2.4 วัน</small>
+        </article>
+        <article class="metric-card accent-green">
+          <div class="metric-top"><span class="metric-icon">✓</span><span class="trend good">+18%</span></div>
+          <strong>12</strong><p data-th="พร้อมดำเนินการต่อ" data-en="Ready to progress">พร้อมดำเนินการต่อ</p><small data-th="จาก 5 ตำแหน่งงาน" data-en="Across 5 open roles">จาก 5 ตำแหน่งงาน</small>
+        </article>
+        <article class="metric-card accent-purple">
+          <div class="metric-top"><span class="metric-icon">◷</span><span class="trend warm">3 upcoming</span></div>
+          <strong>2</strong><p data-th="งานด้านข้อมูลเกินกำหนด" data-en="Data tasks overdue">งานด้านข้อมูลเกินกำหนด</p><small data-th="เกินกำหนดสูงสุด 3 วัน" data-en="Oldest by 3 days">เกินกำหนดสูงสุด 3 วัน</small>
+        </article>
+      </div>
+
+      <div class="main-grid">
+        <article class="panel action-panel">
+          <div class="panel-heading">
+            <div><h2 data-th="งานสำคัญ" data-en="Priority actions">งานสำคัญ</h2><p data-th="เรียงตามความเร่งด่วนและผลกระทบ" data-en="Ordered by urgency and impact">เรียงตามความเร่งด่วนและผลกระทบ</p></div>
+            <button class="text-button" data-go="applications" data-th="ดูทั้งหมด 12 รายการ →" data-en="View all 12 →">ดูทั้งหมด 12 รายการ →</button>
+          </div>
+          <div class="action-list" id="priority-list"></div>
+        </article>
+
+        <article class="panel funnel-panel">
+          <div class="panel-heading">
+            <div><h2 data-th="เส้นทางการจ้างงาน" data-en="Hiring funnel">เส้นทางการจ้างงาน</h2><p data-th="ใบสมัครที่กำลังดำเนินการ · 90 วันที่ผ่านมา" data-en="Active applications · last 90 days">ใบสมัครที่กำลังดำเนินการ · 90 วันที่ผ่านมา</p></div>
+            <button class="more-button" aria-label="More options">•••</button>
+          </div>
+          <div class="funnel" aria-label="Hiring funnel">
+            <div><span><b>32</b><small data-th="ได้รับการแนะนำ" data-en="Referred">ได้รับการแนะนำ</small></span></div>
+            <div><span><b>26</b><small data-th="หลักฐานครบ" data-en="Evidence ready">หลักฐานครบ</small></span></div>
+            <div><span><b>21</b><small data-th="ประเมินแล้ว" data-en="Assessed">ประเมินแล้ว</small></span></div>
+            <div><span><b>15</b><small data-th="สัมภาษณ์แล้ว" data-en="Interviewed">สัมภาษณ์แล้ว</small></span></div>
+            <div><span><b>9</b><small data-th="เริ่มงานแล้ว" data-en="Started">เริ่มงานแล้ว</small></span></div>
+          </div>
+          <div class="funnel-note"><span class="dot orange"></span><div><strong data-th="จุดติดขัดหลัก: การรวบรวมหลักฐาน" data-en="Largest delay: evidence collection">จุดติดขัดหลัก: การรวบรวมหลักฐาน</strong><small data-th="ค่ากลาง 3.2 วัน · มี 5 ใบสมัครกำลังรอ" data-en="Median 3.2 days · 5 applications waiting">ค่ากลาง 3.2 วัน · มี 5 ใบสมัครกำลังรอ</small></div></div>
+        </article>
+      </div>
+
+      <div class="lower-grid">
+        <article class="panel deadline-panel">
+          <div class="panel-heading"><div><h2>Data-handling deadlines</h2><p>Purpose, retention and deletion tasks</p></div><button class="text-button">Open task list →</button></div>
+          <div class="deadline-row overdue"><span class="date-box"><b>06</b><small>NOV</small></span><div><strong>Retention review overdue</strong><p>Application A-008 · recruitment process completed</p></div><span class="tag red">3 days late</span></div>
+          <div class="deadline-row"><span class="date-box"><b>09</b><small>NOV</small></span><div><strong>Confirm processing purpose</strong><p>Application A-021 · owner: May S.</p></div><span class="tag amber">Today</span></div>
+          <div class="deadline-row"><span class="date-box"><b>12</b><small>NOV</small></span><div><strong>30-day follow-up</strong><p>Placement P-014 · Pong T.</p></div><span class="tag blue">In 3 days</span></div>
+        </article>
+        <article class="panel readiness-panel">
+          <div class="panel-heading"><div><h2>Readiness snapshot</h2><p>Why 19 cases cannot progress</p></div></div>
+          <div class="donut-wrap">
+            <div class="donut"><span><b>19</b><small>blocked</small></span></div>
+            <div class="legend">
+              <div><span class="dot coral"></span><p>Missing evidence</p><b>8</b></div>
+              <div><span class="dot blue"></span><p>Role details unclear</p><b>5</b></div>
+              <div><span class="dot purple"></span><p>Work-condition review</p><b>4</b></div>
+              <div><span class="dot grey"></span><p>Outside reviewed scope</p><b>2</b></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="applications-view">
+      <div class="page-heading compact">
+        <div><p class="eyebrow" data-th="พื้นที่จัดการเคส" data-en="CASE WORKSPACE">พื้นที่จัดการเคส</p><h1 data-th="ใบสมัคร" data-en="Applications">ใบสมัคร</h1><p data-th="ทุกเคสมีสถานะ ผู้รับผิดชอบ และขั้นตอนถัดไปที่ชัดเจน" data-en="Every case has a clear status, owner and next action.">ทุกเคสมีสถานะ ผู้รับผิดชอบ และขั้นตอนถัดไปที่ชัดเจน</p></div>
+      </div>
+      <div class="panel table-panel">
+        <div class="table-toolbar">
+          <label class="search-box">⌕ <input id="application-search" type="search" placeholder="Search name, role or ID" /></label>
+          <div class="filter-row">
+            <button class="filter active" data-filter="all"><i data-th="ทั้งหมด" data-en="All">ทั้งหมด</i> <span>12</span></button>
+            <button class="filter" data-filter="action"><i data-th="ต้องดำเนินการ" data-en="Needs action">ต้องดำเนินการ</i> <span>7</span></button>
+            <button class="filter" data-filter="waiting"><i data-th="กำลังรอ" data-en="Waiting">กำลังรอ</i> <span>4</span></button>
+            <button class="filter" data-filter="ready"><i data-th="พร้อม" data-en="Ready">พร้อม</i> <span>1</span></button>
+          </div>
+        </div>
+        <div class="table-head"><span data-th="ผู้สมัครและตำแหน่ง" data-en="APPLICANT & ROLE">ผู้สมัครและตำแหน่ง</span><span data-th="ความพร้อม" data-en="READINESS">ความพร้อม</span><span data-th="ปัญหา / ขั้นตอนถัดไป" data-en="BLOCKER / NEXT ACTION">ปัญหา / ขั้นตอนถัดไป</span><span data-th="ผู้รับผิดชอบ" data-en="OWNER">ผู้รับผิดชอบ</span><span data-th="กำหนด" data-en="DUE">กำหนด</span><span></span></div>
+        <div id="application-table"></div>
+      </div>
+    </section>
+
+    <section class="view" id="outcomes-view">
+      <div class="page-heading compact">
+        <div><p class="eyebrow" data-th="ผลการทดลอง" data-en="PILOT RESULTS">ผลการทดลอง</p><h1 data-th="ผลลัพธ์การจ้างงาน" data-en="Outcomes">ผลลัพธ์การจ้างงาน</h1><p data-th="ติดตามการเริ่มงานและการทำงานต่อเนื่องโดยแสดงฐานคำนวณอย่างโปร่งใส" data-en="Track completed hiring and sustained employment with honest denominators.">ติดตามการเริ่มงานและการทำงานต่อเนื่องโดยแสดงฐานคำนวณอย่างโปร่งใส</p></div>
+        <button class="secondary-button" data-th="ส่งออกรายงานทดลอง" data-en="Export pilot report">ส่งออกรายงานทดลอง</button>
+      </div>
+      <div class="metric-grid outcome-metrics">
+        <article class="metric-card"><small>DOCUMENTED JOB STARTS</small><strong>18</strong><p><span class="up">↑ 20%</span> vs prior period</p></article>
+        <article class="metric-card"><small>MEDIAN REFERRAL → START</small><strong>16d</strong><p><span class="up">↓ 4 days</span> vs baseline</p></article>
+        <article class="metric-card"><small>30-DAY RETENTION</small><strong>88%</strong><p>15 of 17 eligible starts</p></article>
+        <article class="metric-card"><small>FOLLOW-UP COVERAGE</small><strong>94%</strong><p>1 outcome still unknown</p></article>
+      </div>
+      <div class="outcome-grid">
+        <article class="panel retention-card">
+          <div class="panel-heading"><div><h2>Employment follow-up</h2><p>Only placements that reached each milestone</p></div><span class="tag green">Updated today</span></div>
+          <div class="retention-bars">
+            <div><label><b>30 days</b><span>15 retained · 2 left · 1 unknown</span></label><div class="stack"><i style="width:83%"></i><i style="width:11%"></i><i style="width:6%"></i></div><strong>18 eligible</strong></div>
+            <div><label><b>60 days</b><span>11 retained · 2 left · 0 unknown</span></label><div class="stack"><i style="width:85%"></i><i style="width:15%"></i></div><strong>13 eligible</strong></div>
+            <div><label><b>90 days</b><span>7 retained · 1 left · 1 unknown</span></label><div class="stack"><i style="width:78%"></i><i style="width:11%"></i><i style="width:11%"></i></div><strong>9 eligible</strong></div>
+          </div>
+          <div class="bar-legend"><span><i class="green-bg"></i>Confirmed employed</span><span><i class="coral-bg"></i>Known left</span><span><i class="grey-bg"></i>Unknown</span></div>
+        </article>
+        <article class="panel evidence-card">
+          <div class="panel-heading"><div><h2>What changed</h2><p>Pilot signals, with measured baselines</p></div></div>
+          <div class="impact-row"><span class="impact-icon green">↓</span><div><strong>1.8 days faster</strong><p>to complete a reviewed assessment</p></div></div>
+          <div class="impact-row"><span class="impact-icon blue">−</span><div><strong>42% fewer</strong><p>cases left without a named next action</p></div></div>
+          <div class="impact-row"><span class="impact-icon orange">↑</span><div><strong>17% improvement</strong><p>in partner evidence turnaround</p></div></div>
+          <p class="method-note"><span>i</span> Early pilot signals from synthetic prototype data. Replace with observed pilot results before external claims.</p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="case-drawer" id="case-drawer" aria-hidden="true" aria-label="Application detail">
+    <div class="drawer-header"><div><span class="case-id">APPLICATION A-014</span><h2 id="drawer-name">Somchai K.</h2><p id="drawer-role">Warehouse Associate · Bang Na</p></div><button id="close-drawer" aria-label="Close">×</button></div>
+    <div class="case-status"><span class="status-pill evidence">Further evidence required</span><span>Updated 2h ago</span></div>
+    <div class="drawer-section">
+      <h3>Readiness by dimension</h3>
+      <div class="dimension"><span class="dimension-icon ok">✓</span><div><strong>Role requirements</strong><p>No restriction identified within 3 reviewed rules</p></div><span class="tag green">Reviewed</span></div>
+      <div class="dimension"><span class="dimension-icon warn">!</span><div><strong>Skills & training</strong><p>Forklift training confirmation is missing</p></div><span class="tag amber">Action</span></div>
+      <div class="dimension"><span class="dimension-icon ok">✓</span><div><strong>Work arrangements</strong><p>Proposed hours and location recorded</p></div><span class="tag green">Clear</span></div>
+      <div class="dimension"><span class="dimension-icon info">i</span><div><strong>Data handling</strong><p>Purpose recorded · review due 6 May 2027</p></div><span class="tag blue">Tracked</span></div>
+    </div>
+    <div class="drawer-section next-step">
+      <p class="eyebrow">NEXT ACTION</p>
+      <h3>Request training confirmation</h3>
+      <p>Ask CARE Bang Na to confirm the applicant’s completed forklift-safety module.</p>
+      <div class="assignment"><div class="avatar small">MS</div><div><small>OWNER</small><strong>May S. · Case coordinator</strong></div><div><small>DUE</small><strong>Today</strong></div></div>
+      <button class="primary-button full" id="mark-requested">Mark request sent</button>
+    </div>
+    <div class="drawer-section evidence-list">
+      <div class="section-title"><h3>Evidence used</h3><button>View history</button></div>
+      <div><span class="file-icon">PDF</span><p><strong>Identity confirmation</strong><small>Verified by CARE Bang Na · 7 Nov</small></p><span class="check">✓</span></div>
+      <div><span class="file-icon">PDF</span><p><strong>Basic warehouse training</strong><small>Verified by Restart Academy · 6 Nov</small></p><span class="check">✓</span></div>
+      <div class="missing-file"><span class="file-icon">＋</span><p><strong>Forklift training confirmation</strong><small>Requested from CARE Bang Na</small></p><span>Pending</span></div>
+    </div>
+    <div class="scope-warning"><strong>Assessment scope</strong><p>This result applies to this person, role, employer, work arrangement and assessment date. It is not a general “approved” badge.</p></div>
+  </aside>
+
+  <div class="toast" id="toast" role="status"><span>✓</span><div><strong>Request recorded</strong><small>CARE Bang Na will appear as the action owner.</small></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
