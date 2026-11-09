@@ -26,7 +26,7 @@ function publishPanel(url) {
   const selected = url.searchParams.get('occupation');
   const occupation = owns(occupations, selected) ? selected : 'warehouse';
   const options = Object.fromEntries(jobEvidenceOptions(occupation).map(id => [id, evidenceTypes[id] ?? 'ไม่ขอหลักฐานเพิ่ม']));
-  return `<section class="panel hiring-panel" id="publish"><h2>เปิดรับสมัครงาน</h2>
+  return `<section class="panel hiring-panel" id="publish"><div class="section-kicker">แม่แบบประกาศ</div><h2>เปิดรับสมัครงาน</h2>
     <nav class="hiring-options" aria-label="เลือกตำแหน่ง">${Object.entries(occupations).map(([id, row]) =>
       `<a href="/company/jobs?occupation=${id}#publish"${id === occupation ? ' aria-current="true"' : ''}>${row.label}</a>`).join('')}</nav>
     <form class="hiring-form" method="post" action="/hiring">
@@ -129,6 +129,8 @@ function jobsPanel(role, data, now, url) {
     <div class="hiring-job-grid">${jobs.map(job => `<article class="panel hiring-job">
       ${chip(job.selection_end > now ? 'เปิดรับ' : 'ปิดการคัดเลือก', job.selection_end > now ? 'green' : 'grey')}
       <h3>${occupations[job.occupation].label}</h3><p>บริษัทตัวอย่างปาท่องโก๋ · ${districts[job.district]} · ${shifts[job.shift]}</p>
+      ${company ? `<div class="job-review">${chip(occupations[job.occupation].review ? 'ต้องทบทวนข้อกำหนดตำแหน่ง' : 'อยู่ในขอบเขตแม่แบบเดโม', occupations[job.occupation].review ? 'amber' : 'green')}
+      <small>มีคำแจ้งก่อนสมัคร · เก็บเคส ${job.retain_days} วันหลังจบคัดเลือก</small></div>` : ''}
       <p>คุณสมบัติที่ขอ: ${evidenceTypes[job.evidence] ?? 'ไม่ขอหลักฐานเพิ่มเติม'}<br>
       ${occupations[job.occupation].review ? 'ต้องทบทวนข้อกำหนดเฉพาะตำแหน่งก่อนสมัคร' : 'ตรวจความพร้อมเบื้องต้นจากเงื่อนไขประกาศ'}</p>
       ${dataPlan(job)}
@@ -145,11 +147,17 @@ function companyHome(data, now) {
     ['เคสรอทบทวนข้อกำหนด', data.jobs.filter(job => job.selection_end > now && data.cases[job.id]?.status === 'review').length, '/company/jobs#jobs'],
     ['คำขอใช้สิทธิที่รอทบทวน', data.requests.filter(row => row.status === 'pending').length, '/company/privacy#requests']
   ];
-  return `<section class="hiring-panel"><h2>งานที่ต้องติดตาม</h2><div class="hiring-job-grid">${counts.map(([label, count, href]) =>
-    `<a class="panel hiring-job overview-metric" href="${href}"><strong>${count}</strong><span>${label} →</span></a>`).join('')}</div></section>
-    <section class="panel hiring-panel"><h2>จัดการงานของบริษัท</h2><div class="hiring-actions">
-    <a class="workflow-link primary-button" href="/company/jobs#publish">เปิดรับสมัครงาน</a>
-    <a class="workflow-link secondary-button" href="/company/privacy">จัดการข้อมูลและคำขอใช้สิทธิ</a></div></section>`;
+  return `${overviewMetrics('งานที่ต้องติดตาม', counts)}
+    ${complianceFlow()}
+    <section class="panel hiring-panel"><div class="section-kicker">ตัวอย่างรายการที่ต้องจัดการ</div><h2>ถึงวันลบเมื่อไร?</h2>
+    <div class="hiring-row"><div><strong>ข้อมูลคัดเลือก · พนักงานตัวอย่าง จ-024</strong><p>จบคัดเลือกแล้ว 3 วัน นโยบายตัวอย่างให้เก็บ 7 วัน</p></div>
+    ${chip('เหลือ 4 วัน', 'amber')}<a href="/company/privacy#employees">ดูว่าข้อมูลอะไรต้องลบ →</a></div>
+    </section>`;
+}
+
+function overviewMetrics(title, counts) {
+  return `<section class="hiring-panel summary-panel"><div class="section-kicker">สถิติพื้นที่ทดลอง</div><h2>${title}</h2><div class="summary-grid">${counts.map(([label, count, href], index) =>
+    `<a class="panel overview-metric" href="${href}"><span class="metric-symbol" aria-hidden="true">${['▤','◈','◷','✓','◇'][index]}</span><strong>${count}</strong><span>${label} <b aria-hidden="true">↗</b></span></a>`).join('')}</div></section>`;
 }
 
 function applicantHome(data, now) {
@@ -162,12 +170,13 @@ function applicantHome(data, now) {
     ['หลักฐานที่รับรองแล้ว', verifications.filter(row => row.status === 'verified').length, '/applicant/jobs#verify'],
     ['คำขอใช้สิทธิที่รอทบทวน', data.requests.filter(row => row.status === 'pending').length, '/applicant/rights#requests']
   ];
-  return `<section class="hiring-panel"><h2>สรุปสถานะของฉัน</h2><div class="hiring-job-grid">${counts.map(([label, count, href]) =>
-    `<a class="panel hiring-job overview-metric" href="${href}"><strong>${count}</strong><span>${label} →</span></a>`).join('')}</div></section>
-    <section class="panel hiring-panel"><h2>เริ่มจากสิ่งที่คุณต้องการ</h2><div class="hiring-actions">
-    <a class="workflow-link primary-button" href="/applicant/jobs">ค้นหางาน</a>
-    <a class="workflow-link secondary-button" href="/applicant/jobs#verify">ยื่นขอรับรองหลักฐาน</a>
-    <a class="workflow-link secondary-button" href="/applicant/rights">ดูสิทธิของฉัน</a></div></section>`;
+  return `${overviewMetrics('สรุปสถานะของฉัน', counts)}
+    <section class="panel hiring-panel"><div class="section-kicker">ขั้นตอนถัดไป</div><h2>เริ่มสมัครอย่างมั่นใจ</h2>
+    <div class="compliance-steps">
+      <article><span class="step-index">01</span><h3>หางานที่เหมาะ</h3><p>ดูกะ พื้นที่ คุณสมบัติ และข้อมูลที่นายจ้างจะใช้ก่อนสมัคร</p><a href="/applicant/jobs">ค้นหางาน →</a></article>
+      <article><span class="step-index">02</span><h3>ส่งเฉพาะข้อมูลที่จำเป็น</h3><p>ส่งคำขอรับรองในเดโมโดยไม่ต้องแนบเอกสารจริง</p><a href="/applicant/jobs#verify">ดูการรับรอง →</a></article>
+      <article><span class="step-index">03</span><h3>รู้สิทธิของตัวเอง</h3><p>ดูคำแจ้ง ขอดูข้อมูลหรือขอแก้ไข แล้วติดตามผลได้</p><a href="/applicant/rights">ดูสิทธิของฉัน →</a></article>
+    </div></section>`;
 }
 
 function hiringPage(role, data, url, now) {
@@ -182,23 +191,26 @@ function hiringPage(role, data, url, now) {
   const notice = event === 'done' ? '<p class="hiring-note" role="status">บันทึกแล้ว</p>' :
     event === 'blocked' ? '<p class="hiring-note" role="alert">บันทึกไม่ได้ กรุณาตรวจสิทธิ์ เงื่อนไข และสถานะล่าสุดก่อนลองใหม่</p>' : '';
   return `<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${title} · ปาท่องโก๋</title><link rel="stylesheet" href="/styles.css?v=5"></head>
-  <body class="candidate-shell hiring-shell"><main>
-    <header class="topbar"><a class="portal-brand" href="/${role}/overview">ปาท่องโก๋</a><div class="header-actions">
+  <title>${title} · ปาท่องโก๋</title><link rel="stylesheet" href="/styles.css?v=8"></head>
+  <body class="candidate-shell hiring-shell"><div class="compliance-layout">
+    <aside class="compliance-sidebar"><a class="portal-brand" href="/${role}/overview"><span class="compliance-mark" aria-hidden="true"></span><span>ปาท่องโก๋<small>การจ้างงานอย่างเป็นธรรม</small></span></a>
+    <p class="workspace-label">${company ? 'พื้นที่บริษัท' : 'พื้นที่ผู้สมัคร'}</p>
+    <nav class="portal-nav" aria-label="เมนูหลัก">${menus.map(([href, label], index) => `<a href="${href}"${href === url.pathname && !url.searchParams.has('scope') ? ' aria-current="page"' : ''}><span aria-hidden="true">${['⌂','▤','◇','✓','◉'][index]}</span>${label}</a>`).join('')}</nav>
+    <div class="sidebar-demo"><strong>พื้นที่ทดลอง</strong><small>ใช้เฉพาะข้อมูลจำลอง</small></div></aside>
+    <main><header class="topbar"><strong>${company ? 'การจ้างงานและกฎหมาย' : 'พื้นที่ของฉัน'}</strong><div class="header-actions">
     <form method="post" action="/login/${other}"><button class="secondary-button">สลับไปฝั่ง${company ? 'ผู้สมัคร' : 'บริษัท'}</button></form></div></header>
-    <nav class="portal-nav" aria-label="เมนูหลัก">${menus.map(([href, label]) => `<a href="${href}"${href === url.pathname && !url.searchParams.has('scope') ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>
-    <div class="hiring-content"><div class="hiring-hero"><p class="eyebrow">${company ? 'พื้นที่บริษัท' : 'พื้นที่ผู้สมัคร'}</p><h1>${title}</h1>
+    <div class="hiring-content"><div class="hiring-hero"><p class="eyebrow">${company ? 'สรรหาอย่างรับผิดชอบ' : 'เตรียมพร้อมสมัครงาน'}</p><h1>${title}</h1>
     <p>${company ? 'ติดตามประกาศ ใบสมัคร และการจัดการข้อมูลในพื้นที่เดโมของคุณ' : section === 'overview' ? 'ติดตามใบสมัครและการรับรอง แล้วเลือกขั้นตอนถัดไปของคุณ' : 'ดูตำแหน่งที่เปิดรับและสิทธิที่เกี่ยวข้องกับการสมัครงาน'}</p>
+    ${company && section === 'overview' ? '<a class="hero-action" href="/company/jobs#policy">ตรวจประกาศก่อนเปิดรับ →</a>' : ''}
     ${!company && section === 'jobs' ? jobSearchForm(url) : ''}</div>
-    <p class="hiring-note">พื้นที่นี้ใช้ข้อมูลจำลองและแยกตามเบราว์เซอร์ ผลทบทวนใช้เพื่อทดลองตามตำแหน่งและเคส</p>
     ${notice}${company
       ? section === 'privacy' ? companyPrivacy(data, url, now)
-        : section === 'jobs' ? publishPanel(url) + verificationPanel(role, data.verifications) + jobsPanel(role, data, now, url)
+        : section === 'jobs' ? postingAudit(url) + publishPanel(url) + verificationPanel(role, data.verifications) + jobsPanel(role, data, now, url)
         : companyHome(data, now)
       : section === 'rights' ? applicantRights(data)
         : section === 'jobs' ? jobsPanel(role, data, now, url) + verificationPanel(role, data.verifications)
         : applicantHome(data, now)}
-    </div></main></body></html>`;
+    </div></main></div></body></html>`;
 }
 
 async function handleHiring(request, url, env, { role, space }) {

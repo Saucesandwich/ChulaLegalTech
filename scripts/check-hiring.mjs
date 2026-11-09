@@ -73,7 +73,7 @@ assert.equal(env.DB.prepare('SELECT status FROM hiring_cases WHERE job_id = ?').
 await act(applicant, { action: 'apply', job: security, ...screening }, 'blocked');
 await act(applicant, { action: 'right-request', kind: 'erase' });
 await act(applicant, { action: 'right-request', kind: 'erase' }, 'blocked');
-const removal = env.DB.prepare('SELECT id FROM demo_rights_requests WHERE demo_space = ?').bind(space).first().id;
+const removal = env.DB.prepare("SELECT id FROM demo_rights_requests WHERE demo_space = ? AND kind = 'erase'").bind(space).first().id;
 await act(outsider, { action: 'right-erase', request: removal, confirm: 'yes' }, 'blocked');
 await act(company, { action: 'right-erase', request: removal }, 'blocked');
 await act(company, { action: 'right-erase', request: removal, confirm: 'yes' });
@@ -81,4 +81,7 @@ assert.match(await page('applicant/rights', applicant), /ลบข้อมู�
 assert.equal(env.DB.prepare('SELECT status FROM hiring_cases WHERE job_id = ?').bind(warehouse).first(), null);
 assert.match(await page('company/privacy?basis=standard&finish=2025-08-31', company), /28 กุมภาพันธ์ 2569/);
 assert.doesNotMatch(await page('company/privacy?basis=exception&finish=2025-08-31', company), /28 กุมภาพันธ์ 2569/);
+assert.match(await page('company/privacy', company), /พนักงานตัวอย่าง จ-024/);
+assert.match(await page('company/jobs?audit=1&data=criminal&basis=unconfirmed', company), /พักการขอข้อมูล/);
+assert.match(await page('company/jobs?audit=1&data=skill&basis=review&notice=ready&period=7', company), /เก็บตามแผนเดโม 7 วันหลังจบการคัดเลือก/);
 console.log('Verified passwordless roles, workspace isolation, hiring, search, privacy requests and retention.');
