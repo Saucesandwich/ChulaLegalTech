@@ -15,6 +15,31 @@
   --red: #c6534d;
   --shadow: 0 10px 36px rgba(26, 53, 49, 0.07);
 }
+.candidate-shell main, .login-shell main { margin-left: 0; }
+.portal-brand { color: var(--green); font: 800 21px Tahoma, sans-serif; text-decoration: none; }
+.candidate-shell .applicant-view { max-width: 1200px; }
+.candidate-shell .panel-heading p, .candidate-shell .journey-item p, .candidate-shell .job-match p,
+.candidate-shell .appointment-card p, .candidate-shell .privacy-card p { font-size: 13px; }
+.candidate-shell .journey-item strong, .candidate-shell .job-match h3 { font-size: 15px; }
+.candidate-shell .save-job { min-width: 44px; min-height: 44px; }
+.candidate-shell dialog { border: 1px solid var(--line); border-radius: 16px; padding: 24px; color: var(--ink); max-width: min(440px, 90vw); }
+.candidate-shell dialog::backdrop { background: rgba(16, 47, 45, .5); }
+.candidate-shell dialog p { line-height: 1.7; }
+.login-shell { display: grid; place-items: center; padding: 20px; background: linear-gradient(145deg, #f9f3e9, #e9f4ef); }
+.login-shell .login-card { min-height: 0; width: min(100%, 520px); padding: clamp(22px, 5vw, 42px); background: white; border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+.login-card .eyebrow { margin-top: 28px; color: #9c4d2b !important; }
+.login-card h1 { font-size: clamp(23px, 5vw, 31px); margin: 6px 0 12px; }
+.login-card p { line-height: 1.6; color: var(--muted); }
+.portal-choices, .login-form { display: grid; gap: 12px; margin: 22px 0; }
+.portal-choices a { display: grid; gap: 5px; padding: 15px; background: var(--green-soft); color: var(--ink); border-radius: 10px; text-decoration: none; }
+.portal-choices a:hover { outline: 2px solid var(--green); }
+.portal-choices a span, .login-note, .login-form label span { font-size: 12px; }
+.login-form label { display: grid; gap: 5px; font-weight: 650; }
+.login-form label span { color: var(--muted); font-weight: 400; }
+.login-form input { border: 1px solid #9baaa5; border-radius: 8px; min-height: 44px; padding: 8px 10px; }
+.login-form button { min-height: 44px; }
+.login-back { color: var(--green); }
+.login-form .login-error { color: #a33b36; margin: 0; }
 * { box-sizing: border-box; }
 body { margin: 0; min-height: 100vh; background: var(--canvas); color: var(--ink); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; }
 button, input { font: inherit; }

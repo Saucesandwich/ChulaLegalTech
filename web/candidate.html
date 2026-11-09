@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ปาท่องโก๋ แพลตฟอร์มเชื่อมโอกาสการจ้างงานสำหรับผู้พ้นโทษและนายจ้าง" />
+  <title>พื้นที่ผู้สมัคร · ปาท่องโก๋</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="candidate-shell">
+  <main>
+    <header class="topbar">
+      <a class="portal-brand" href="/applicant">ปาท่องโก๋</a>
+      <div class="header-actions"><button class="language-toggle" id="language-toggle" aria-label="TH / EN"><b>TH</b><span>EN</span></button><form method="post" action="/logout"><button class="secondary-button" data-th="ออกจากระบบ" data-en="Sign out">ออกจากระบบ</button></form></div>
+    </header>
+    <section class="view active applicant-view" id="applicant-view">
+      <div class="applicant-hero">
+        <div>
+          <p class="eyebrow" data-th="พื้นที่ของฉัน" data-en="MY OPPORTUNITY">พื้นที่ของฉัน</p>
+          <h1 data-th="สวัสดี สมชาย — ไปต่อด้วยกันนะ" data-en="Hello Somchai — let’s take the next step together">สวัสดี สมชาย — ไปต่อด้วยกันนะ</h1>
+          <p data-th="ดูความพร้อม งานที่เหมาะกับคุณ และเลือกได้ว่าใครเข้าถึงข้อมูลของคุณ" data-en="See your readiness, matched jobs, and choose who can access your information.">ดูความพร้อม งานที่เหมาะกับคุณ และเลือกได้ว่าใครเข้าถึงข้อมูลของคุณ</p>
+        </div>
+        <span class="tag amber" data-th="ข้อมูลจำลอง" data-en="Demo data">ข้อมูลจำลอง</span>
+      </div>
+
+      <div class="applicant-layout">
+        <div class="applicant-main">
+          <article class="panel journey-card">
+            <div class="panel-heading"><div><h2 data-th="ขั้นตอนต่อไปของคุณ" data-en="Your next steps">ขั้นตอนต่อไปของคุณ</h2><p data-th="ทำทีละขั้น ไม่ต้องจัดการทุกอย่างคนเดียว" data-en="One step at a time — you do not have to manage this alone.">ทำทีละขั้น ไม่ต้องจัดการทุกอย่างคนเดียว</p></div><span class="tag amber">2 <span data-th="งานที่ต้องทำ" data-en="actions">งานที่ต้องทำ</span></span></div>
+            <div class="journey-list">
+              <div class="journey-item done"><span>✓</span><div><strong data-th="ยืนยันข้อมูลประจำตัว" data-en="Confirm your identity">ยืนยันข้อมูลประจำตัว</strong><p data-th="ตรวจสอบโดย CARE บางนา · 7 พ.ย." data-en="Verified by CARE Bang Na · 7 Nov">ตรวจสอบโดย CARE บางนา · 7 พ.ย.</p></div><b data-th="เสร็จแล้ว" data-en="Done">เสร็จแล้ว</b></div>
+              <button class="journey-item current" id="upload-training"><span>2</span><div><strong data-th="เพิ่มหลักฐานการอบรมรถยก" data-en="Add forklift training evidence">เพิ่มหลักฐานการอบรมรถยก</strong><p data-th="ช่วยให้นายจ้างพิจารณาตำแหน่งคลังสินค้าได้" data-en="Helps employers consider you for warehouse roles.">ช่วยให้นายจ้างพิจารณาตำแหน่งคลังสินค้าได้</p></div><b data-th="เพิ่มข้อมูล →" data-en="Add evidence →">เพิ่มข้อมูล →</b></button>
+              <div class="journey-item"><span>3</span><div><strong data-th="เตรียมสัมภาษณ์" data-en="Prepare for interview">เตรียมสัมภาษณ์</strong><p data-th="พี่เลี้ยงจะช่วยทบทวนคำถามกับคุณ" data-en="Your coach will help you practise common questions.">พี่เลี้ยงจะช่วยทบทวนคำถามกับคุณ</p></div><b data-th="รอขั้นตอนก่อนหน้า" data-en="Up next">รอขั้นตอนก่อนหน้า</b></div>
+            </div>
+          </article>
+
+          <article class="panel jobs-card">
+            <div class="panel-heading"><div><h2 data-th="งานที่เหมาะกับคุณ" data-en="Jobs matched to you">งานที่เหมาะกับคุณ</h2><p data-th="จับคู่จากทักษะ สถานที่ และเวลาทำงานที่คุณสะดวก" data-en="Matched from your skills, location, and preferred hours.">จับคู่จากทักษะ สถานที่ และเวลาทำงานที่คุณสะดวก</p></div></div>
+            <div class="job-list">
+              <article class="job-match"><div class="company-logo">AC</div><div><h3 data-th="พนักงานคลังสินค้า" data-en="Warehouse Associate">พนักงานคลังสินค้า</h3><p>Acme Logistics · บางนา · ฿14,500–17,000</p><div><span data-th="กะกลางวัน" data-en="Day shift">กะกลางวัน</span><span data-th="มีรถรับส่ง" data-en="Staff shuttle">มีรถรับส่ง</span><span data-th="ยินดีรับผู้เริ่มต้นใหม่" data-en="Second-chance friendly">ยินดีรับผู้เริ่มต้นใหม่</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
+              <article class="job-match"><div class="company-logo alt">SP</div><div><h3 data-th="พนักงานแพ็กสินค้า" data-en="Packing Operator">พนักงานแพ็กสินค้า</h3><p>Siam Pack · พระโขนง · ฿13,500–15,500</p><div><span data-th="ไม่ต้องมีประสบการณ์" data-en="No experience required">ไม่ต้องมีประสบการณ์</span><span data-th="มีอบรม" data-en="Training provided">มีอบรม</span></div></div><button class="save-job" aria-label="บันทึกงาน">♡</button></article>
+            </div>
+          </article>
+        </div>
+
+        <aside class="applicant-side">
+          <article class="panel appointment-card">
+            <p class="eyebrow" data-th="นัดหมายถัดไป" data-en="NEXT APPOINTMENT">นัดหมายถัดไป</p>
+            <div class="appointment-date"><b>12</b><span>พ.ย.<small>10:30 น.</small></span></div>
+            <h3 data-th="เตรียมความพร้อมก่อนสัมภาษณ์" data-en="Interview preparation">เตรียมความพร้อมก่อนสัมภาษณ์</h3><p data-th="กับคุณเมย์ · CARE บางนา" data-en="With May · CARE Bang Na">กับคุณเมย์ · CARE บางนา</p>
+            <button class="secondary-button full" id="appointment-detail" data-th="ดูรายละเอียด" data-en="View details">ดูรายละเอียด</button>
+          </article>
+          <article class="panel privacy-card">
+            <span class="privacy-icon">⌾</span><h3 data-th="ข้อมูลของคุณ คุณเป็นคนเลือก" data-en="Your information, your choice">ข้อมูลของคุณ คุณเป็นคนเลือก</h3>
+            <p data-th="ดูว่าข้อมูลตัวอย่างรายการใดแชร์กับนายจ้าง" data-en="See which sample details are shared with the employer.">ดูว่าข้อมูลตัวอย่างรายการใดแชร์กับนายจ้าง</p>
+            <div><span data-th="แชร์กับ Acme Logistics" data-en="Shared with Acme Logistics">แชร์กับ Acme Logistics</span><b data-th="3 รายการ" data-en="3 items">3 รายการ</b></div>
+            <button class="text-button" id="privacy-manage" data-th="จัดการการเข้าถึงข้อมูล →" data-en="Manage access →">จัดการการเข้าถึงข้อมูล →</button>
+          </article>
+          <article class="support-card"><span>♡</span><div><strong data-th="ต้องการความช่วยเหลือ?" data-en="Need help?">ต้องการความช่วยเหลือ?</strong><p data-th="ติดต่อพี่เลี้ยงของคุณได้โดยไม่เสียค่าใช้จ่าย" data-en="Contact your support coach at no cost.">ติดต่อพี่เลี้ยงของคุณได้โดยไม่เสียค่าใช้จ่าย</p></div><button id="contact-coach" data-th="ติดต่อ" data-en="Contact">ติดต่อ</button></article>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <dialog id="candidate-dialog" aria-labelledby="candidate-title">
+    <h2 id="candidate-title"></h2>
+    <p id="candidate-detail"></p>
+    <form method="dialog"><button class="primary-button" data-th="ปิด" data-en="Close">ปิด</button></form>
+  </dialog>
+  <script src="candidate.js"></script>
+</body>
+</html>

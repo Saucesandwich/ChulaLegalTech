@@ -137,10 +137,4 @@ document.querySelector('#mark-requested').addEventListener('click', e => {
   e.currentTarget.textContent = currentLang === 'th' ? '✓ ส่งคำขอแล้ว' : '✓ Request sent'; e.currentTarget.disabled = true;
   showToast(currentLang === 'th' ? 'บันทึกคำขอแล้ว' : 'Request recorded', currentLang === 'th' ? 'CARE บางนาจะได้รับงานนี้' : 'CARE Bang Na will appear as the action owner.');
 });
-document.querySelector('#upload-training').addEventListener('click', () => showToast(currentLang === 'th' ? 'พร้อมเพิ่มหลักฐาน' : 'Ready to add evidence', currentLang === 'th' ? 'ต้นแบบจะเปิดขั้นตอนอัปโหลดแบบปลอดภัยในระบบจริง' : 'The full product will open a secure evidence flow.'));
-document.querySelectorAll('.save-job').forEach(button => button.addEventListener('click', () => { button.classList.toggle('saved'); button.textContent = button.classList.contains('saved') ? '♥' : '♡'; showToast(currentLang === 'th' ? 'บันทึกงานแล้ว' : 'Job saved', currentLang === 'th' ? 'คุณดูงานนี้ได้อีกครั้งในรายการที่บันทึก' : 'You can revisit it in your saved jobs.'); }));
-document.querySelector('#appointment-detail').addEventListener('click', () => showToast(currentLang === 'th' ? 'นัดหมาย 12 พ.ย. 10:30 น.' : 'Appointment · 12 Nov, 10:30', currentLang === 'th' ? 'เตรียมสัมภาษณ์กับคุณเมย์ที่ CARE บางนา' : 'Interview preparation with May at CARE Bang Na.'));
-document.querySelector('#privacy-manage').addEventListener('click', () => showToast(currentLang === 'th' ? 'การเข้าถึงข้อมูล' : 'Information access', currentLang === 'th' ? 'ขณะนี้แชร์ 3 รายการกับ Acme Logistics' : '3 items are currently shared with Acme Logistics.'));
-document.querySelector('#contact-coach').addEventListener('click', () => showToast(currentLang === 'th' ? 'แจ้งพี่เลี้ยงแล้ว' : 'Coach notified', currentLang === 'th' ? 'คุณเมย์จะติดต่อกลับผ่านช่องทางที่คุณเลือก' : 'May will contact you through your preferred channel.'));
-
 applyLanguage('th');

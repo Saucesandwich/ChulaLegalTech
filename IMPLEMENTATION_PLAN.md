@@ -142,9 +142,26 @@ Add a candidate-facing “พื้นที่ของฉัน / My opportuni
 
 Candidate wording should remain supportive and avoid labels that define a person by their conviction history. The operational data model should expose only the minimum information the candidate needs, and any future evidence upload or employer sharing action must include purpose, access, and withdrawal information appropriate to the applicable legal basis.
 
-## 11. Deferred scope
+## 11. Pain points and separated demo accounts
 
-Leave authentication, real partner portals, messaging, document storage, legal-rule engines, government integrations, real consent/retention enforcement, databases, Power BI services, and tax-rule calculations outside this prototype.
+The primary brief (pp. 1, 4–6) and survey / solution notes (pp. 1–4) identify the following product needs.
+
+| Pain point | Company workspace | Applicant workspace |
+| --- | --- | --- |
+| Occupational requirements are hard to interpret; applicants miss opportunities | Show assessment scope and next review step for each role | Show illustrative opportunities and preparation steps |
+| Skills and work history are hard to share and verify | Show evidence status, source and verifier | Explain which training evidence is missing |
+| Collection purpose and retention are unclear; applicants lack visibility into sharing | Show example data handling tasks and deadlines | List the sample information shared with the employer |
+| Individual work location and shift conditions can be missed | Flag work arrangements for review | Show role and shift information in job cards |
+| Employer networks are limited, coordination is manual and retention support is uneven | Show action owners and outcome follow-up | Show opportunities, sample appointment and support coach |
+| Employers are uncertain about applicable tax incentives | Defer tax calculation pending current legal review | — |
+
+The survey notes report different respondent bases. Use them as exploratory evidence, and confirm question-level denominators before publishing percentages.
+
+Give each audience a distinct login, portal and script. Verify credentials and signed sessions server-side. The shared accounts are for synthetic demonstration data. Production would require individual identities and organization- and applicant-level data permissions.
+
+## 12. Deferred scope
+
+Leave production identity management, real partner portals, messaging, document storage, legal-rule engines, government integrations, real consent/retention enforcement, databases, Power BI services, and tax-rule calculations outside this prototype.
 
 Tax benefits and employer cost savings may become an optional later UI scenario. They are not needed for the core pitch flow. Any later tax screen should display explicit illustrative assumptions and reviewed rule dates rather than promise eligibility.
 
