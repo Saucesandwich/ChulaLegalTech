@@ -11,7 +11,7 @@ const entries = {
 const assets = Object.fromEntries(await Promise.all(Object.entries(entries).map(async ([key, path]) =>
   [key, await readFile(new URL(path, root), 'utf8')]
 )));
-const worker = (await Promise.all(['hiring-data.mjs', 'hiring-ui.mjs', 'demo.mjs'].map(file =>
+const worker = (await Promise.all(['hiring-data.mjs', 'privacy.mjs', 'hiring-ui.mjs', 'demo.mjs'].map(file =>
   readFile(new URL('worker/' + file, root), 'utf8')
 ))).join('\n');
 await mkdir(new URL('dist/server/', root), { recursive: true });

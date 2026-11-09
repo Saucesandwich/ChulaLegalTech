@@ -1,9 +1,9 @@
 const roles = {
-  company: { name: 'บริษัท', en: 'Company', user: 'company-demo', secret: 'COMPANY_DEMO_PASSWORD', script: 'companyScript' },
-  applicant: { name: 'ผู้สมัคร', en: 'Applicant', user: 'applicant-demo', secret: 'APPLICANT_DEMO_PASSWORD', script: 'applicantScript' }
+  company: { name: 'บริษัท', script: 'companyScript' },
+  applicant: { name: 'ผู้สมัคร', script: 'applicantScript' }
 };
 const cookieName = 'pathongko_session';
-const sessionSeconds = 4 * 60 * 60;
+const sessionSeconds = 30 * 24 * 60 * 60;
 const encoder = new TextEncoder();
 
 function response(body, type, status = 200) {
@@ -33,61 +33,41 @@ function signature(key, message) {
   return crypto.subtle.sign('HMAC', key, encoder.encode(message));
 }
 
-async function sessionRole(request, key) {
+async function demoSession(request, key) {
   const cookie = request.headers.get('cookie')?.split(';').map(item => item.trim())
     .find(item => item.startsWith(cookieName + '='));
   const value = cookie?.slice(cookieName.length + 1) ?? '';
-  const parts = /^(company|applicant)\.(\d{1,12})\.([0-9a-f]{64})$/.exec(value);
-  if (!parts || Number(parts[2]) <= Date.now() / 1000) return null;
-  const [, role, expires, hex] = parts;
+  const parts = /^(company|applicant)\.([a-f0-9-]{36})\.(\d{1,12})\.([0-9a-f]{64})$/.exec(value);
+  if (!parts || Number(parts[3]) <= Date.now() / 1000) return null;
+  const [, role, space, expires, hex] = parts;
   const proof = Uint8Array.from(hex.match(/../g), byte => parseInt(byte, 16));
-  const verified = await crypto.subtle.verify('HMAC', key, proof, encoder.encode(`session:${role}.${expires}`));
-  return verified ? role : null;
+  const verified = await crypto.subtle.verify('HMAC', key, proof, encoder.encode(`session:${role}.${space}.${expires}`));
+  return verified ? { role, space } : null;
 }
 
-function loginPage(role, error = '', status = 200) {
-  const account = roles[role];
-  const content = account ? `
-    <p class="eyebrow">บัญชีเดโม</p>
-    <h1>เข้าสู่ระบบฝั่ง${account.name}</h1>
-    <form method="post" action="/login/${role}" class="login-form">
-      ${error ? `<p role="alert" class="login-error">${error}</p>` : ''}
-      <label>ชื่อผู้ใช้<input name="username" autocomplete="username" required maxlength="64"></label>
-      <label>รหัสผ่าน<input name="password" type="password" autocomplete="current-password" required maxlength="128"></label>
-      <button class="primary-button">เข้าสู่ระบบ</button>
-    </form>
-    <a class="login-back" href="/">← เลือกอีกฝั่ง</a>
-  ` : `
-    <p class="eyebrow">พื้นที่ทดลอง</p>
-    <h1>ยินดีต้อนรับสู่ปาท่องโก๋</h1>
-    <p>เลือกพื้นที่ที่คุณต้องการทดลอง แล้วเข้าสู่ระบบด้วยบัญชีเดโมของฝั่งนั้น</p>
+function entryPage(role) {
+  const button = (key, label, detail) => `<form method="post" action="/login/${key}">
+    <button class="demo-entry"><strong>${label}</strong><span>${detail} →</span></button></form>`;
+  const content = role
+    ? `<h1>เข้าใช้งานฝั่ง${roles[role].name}</h1><div class="portal-choices">${button(role, 'เข้าเดโม', 'เริ่มใช้งาน')}</div><a href="/">← เลือกอีกฝั่ง</a>`
+    : `<h1>ยินดีต้อนรับสู่ปาท่องโก๋</h1>
+    <p>เลือกฝั่งที่อยากทดลอง สลับฝั่งได้ในเบราว์เซอร์เดียวกัน</p>
     <div class="portal-choices">
-      <a href="/login/company"><strong>สำหรับบริษัท</strong><span>เปิดรับงานและตรวจหลักฐาน →</span></a>
-      <a href="/login/applicant"><strong>สำหรับผู้สมัคร</strong><span>หางานและยื่นขอรับรอง →</span></a>
-    </div>
-  `;
-  return response(`<!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>เข้าสู่ระบบ · ปาท่องโก๋</title><link rel="stylesheet" href="/styles.css"></head>
-<body class="login-shell"><main class="login-card"><a class="portal-brand" href="/">ปาท่องโก๋</a>
-${content}<p class="login-note">ระบบสาธิตใช้ข้อมูลจำลอง กรุณาใช้บัญชีเดโมที่ได้รับ</p></main></body></html>`, 'text/html', status);
+      ${button('applicant', 'สำหรับผู้สมัคร', 'ค้นหางานและดูสิทธิของฉัน')}
+      ${button('company', 'สำหรับบริษัท', 'ดูภาพรวมการสรรหาและจัดการข้อมูล')}
+    </div>`;
+  return response(`<!doctype html><html lang="th"><head><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>ปาท่องโก๋ · พื้นที่ทดลอง</title>
+  <link rel="stylesheet" href="/styles.css?v=5"></head>
+  <body class="login-shell"><main class="login-card"><a class="portal-brand" href="/">ปาท่องโก๋</a>
+  ${content}<p class="login-note">เข้าเดโมได้โดยไม่ต้องกรอกรหัสผ่าน ข้อมูลทั้งหมดเป็นข้อมูลจำลอง</p></main></body></html>`, 'text/html');
 }
 
-async function login(request, url, env, key, role) {
-  if (!request.headers.get('content-type')?.startsWith('application/x-www-form-urlencoded')) {
-    return response('Unsupported form type', 'text/plain', 415);
-  }
-  const body = await request.text();
-  if (body.length > 2048) return response('Form too large', 'text/plain', 413);
-  const form = new URLSearchParams(body);
-  const account = roles[role];
-  const password = form.get('password') ?? '';
-  const expected = await signature(key, 'password:' + env[account.secret]);
-  const matches = await crypto.subtle.verify('HMAC', key, expected, encoder.encode('password:' + password));
-  if (form.get('username')?.trim() !== account.user || !matches) {
-    return loginPage(role, 'ชื่อผู้ใช้หรือรหัสผ่านไม่ตรงกับบัญชีของฝั่งนี้', 401);
-  }
-  const value = role + '.' + (Math.floor(Date.now() / 1000) + sessionSeconds);
+async function enterDemo(url, env, key, role, session) {
+  if (!env.DB) return response('ยังไม่ได้เชื่อมฐานข้อมูลเดโม', 'text/plain', 503);
+  const space = session?.space ?? crypto.randomUUID();
+  if (!session) await seedDemoJobs(env.DB, space, Date.now());
+  const value = role + '.' + space + '.' + (Math.floor(Date.now() / 1000) + sessionSeconds);
   const proof = await signature(key, 'session:' + value);
   const hex = Array.from(new Uint8Array(proof), byte => byte.toString(16).padStart(2, '0')).join('');
   return redirect('/' + role, sessionCookie(value + '.' + hex, sessionSeconds, url));
@@ -100,31 +80,36 @@ export default {
     if (request.method === 'GET' && path === '/styles.css') return response(assets.styles, 'text/css');
 
     const loginRole = /^\/login\/(company|applicant)$/.exec(path)?.[1];
-    const portal = /^\/(company|applicant)(\/overview)?$/.exec(path);
+    const portal = /^\/(company|applicant)(?:\/(overview|jobs|privacy|rights))?$/.exec(path);
     const scriptRole = path === '/app.js' ? 'company' : path === '/candidate.js' ? 'applicant' : null;
 
-    if (!env.DEMO_SESSION_SECRET || !env.COMPANY_DEMO_PASSWORD || !env.APPLICANT_DEMO_PASSWORD) {
+    if (!env.DEMO_SESSION_SECRET) {
       return response('Demo sign-in is not configured', 'text/plain', 503);
     }
     const key = await crypto.subtle.importKey('raw', encoder.encode(env.DEMO_SESSION_SECRET),
       { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']);
-    const role = await sessionRole(request, key);
+    const session = await demoSession(request, key);
+    const role = session?.role;
     if (request.method === 'POST') {
       if (request.headers.get('origin') !== url.origin) return response('Forbidden', 'text/plain', 403);
       if (path === '/logout') return redirect('/', sessionCookie('', 0, url));
-      if (loginRole) return login(request, url, env, key, loginRole);
+      if (loginRole) return enterDemo(url, env, key, loginRole, session);
       if (path === '/hiring') {
         if (!role) return redirect('/');
-        return handleHiring(request, url, env, role);
+        return handleHiring(request, url, env, session);
       }
     }
     if (request.method === 'GET') {
-      if (path === '/') return role ? redirect('/' + role) : loginPage();
-      if (loginRole) return role === loginRole ? redirect('/' + role) : loginPage(loginRole);
+      if (path === '/') return entryPage();
+      if (loginRole) return role === loginRole ? redirect('/' + role) : entryPage(loginRole);
       if (portal) {
         if (!role) return redirect('/login/' + portal[1]);
         if (role !== portal[1]) return redirect('/' + role);
-        return portal[2] ? response(assets[role], 'text/html') : handleHiring(request, url, env, role);
+        if (portal[2] === 'overview') return response(assets[role], 'text/html');
+        if ((role === 'company' && portal[2] === 'rights') || (role === 'applicant' && ['jobs','privacy'].includes(portal[2]))) {
+          return redirect('/' + role);
+        }
+        return handleHiring(request, url, env, session);
       }
       if (scriptRole) {
         if (role !== scriptRole) return response('Forbidden', 'text/plain', 403);

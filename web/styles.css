@@ -44,6 +44,22 @@
 .hiring-shell .header-actions a { color: var(--green); }
 .portal-brand { color: var(--green); font: 800 21px Tahoma, sans-serif; text-decoration: none; }
 .workflow-link { display: inline-flex; align-items: center; text-decoration: none; white-space: nowrap; }
+.portal-nav { display: flex; gap: 8px; padding: 9px clamp(15px, 4vw, 45px); background: white; border-bottom: 1px solid var(--line); overflow: auto; }
+.portal-nav a { flex: none; color: var(--ink); padding: 8px 12px; border-radius: 8px; text-decoration: none; }
+.portal-nav a[aria-current] { color: var(--green); font-weight: 700; background: var(--green-soft); }
+.demo-entry { width: 100%; display: grid; gap: 5px; padding: 15px; background: var(--green-soft); color: var(--ink); border: 1px solid transparent; border-radius: 10px; text-align: left; cursor: pointer; }
+.demo-entry:hover { border-color: var(--green); }
+.demo-entry span { font-size: 12px; }
+.job-search { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; gap: 10px; align-items: end; margin-top: 20px; padding: 13px; border-radius: 13px; color: var(--ink); background: #fff; }
+.job-search label { display: grid; gap: 4px; font-weight: 600; }
+.job-search input, .job-search select, .hiring-fields input { font: inherit; border-radius: 8px; min-height: 40px; padding: 7px; width: 100%; background: white; border: 1px solid #a9b6af; }
+.hiring-results { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+.overview-metric { display: grid; gap: 4px; text-decoration: none; color: var(--ink); }
+.overview-metric strong { font-size: 32px; color: var(--green); }
+@media (max-width: 720px) {
+  .job-search { grid-template-columns: 1fr 1fr; }
+  .job-search label:first-child, .job-search button { grid-column: 1 / -1; }
+}
 .method-note .pilot-copy { display: inline; width: auto; height: auto; border: 0; font: inherit; }
 .candidate-shell .applicant-view { max-width: 1200px; }
 .candidate-shell .panel-heading p, .candidate-shell .journey-item p, .candidate-shell .job-match p,

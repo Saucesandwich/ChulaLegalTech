@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 export function openLocalD1() {
   const db = new DatabaseSync(':memory:');
   db.exec(readFileSync(new URL('../drizzle/0000_hiring.sql', import.meta.url), 'utf8'));
+  db.exec(readFileSync(new URL('../drizzle/0001_demo_privacy.sql', import.meta.url), 'utf8'));
   return {
     prepare(sql) {
       const query = db.prepare(sql);
