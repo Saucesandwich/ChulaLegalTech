@@ -17,9 +17,15 @@ async function seedDemoJobs(db, space, now) {
     ['packing', 'lat', 'evening', 'none', 0],
     ['security', 'phra', 'night', 'licence', 7]
   ];
-  await db.batch(examples.map(([role, district, shift, evidence, retain]) =>
-    db.prepare('INSERT INTO hiring_jobs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
-      .bind(crypto.randomUUID(), role, district, shift, evidence, retain, now + 14 * day, now, space)));
+  const jobs = examples.map(values => ({ id: crypto.randomUUID(), values }));
+  await db.batch([
+    ...jobs.map(({ id, values }) => db.prepare('INSERT INTO hiring_jobs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
+      .bind(id, ...values, now + 14 * day, now, space)),
+    db.prepare("INSERT INTO hiring_cases VALUES (?, 'applied', ?)").bind(jobs[1].id, now - day),
+    db.prepare("INSERT INTO demo_verifications VALUES (?, 'identity', 'verified', ?)").bind(space, now - 2 * day),
+    db.prepare("INSERT INTO demo_verifications VALUES (?, 'warehouse', 'pending', ?)").bind(space, now - day),
+    db.prepare("INSERT INTO demo_rights_requests VALUES (?, ?, 'access', 'pending', ?, ?)").bind(crypto.randomUUID(), space, now - day, now - day)
+  ]);
 }
 
 async function writePrivacy(db, space, role, form, now) {
@@ -123,10 +129,9 @@ function companyPrivacy(data, url, now) {
   for (const row of Object.values(data.verifications)) entries.push([
     evidenceTypes[row.category], 'สถานะคำขอรับรองเพื่อเช็กคุณสมบัติ', 'ผู้ตรวจและผู้สมัครในเดโม', row.updated_at + 30 * day
   ]);
-  return `${retentionPanel(url)}
-  <section class="panel hiring-panel"><h2>ทะเบียนข้อมูลที่เก็บในพื้นที่นี้</h2><p>เดโมเก็บเฉพาะสถานะและเวลา รายการที่ครบกำหนดจะถูกลบในการใช้งานครั้งถัดไป</p>
+  return `<section class="panel hiring-panel" id="inventory"><div class="section-kicker">03 · หลังจบคัดเลือก</div><h2>ทะเบียนข้อมูลที่เก็บในพื้นที่นี้</h2><p>เดโมเก็บเฉพาะสถานะและเวลา รายการที่ครบกำหนดจะถูกลบในการใช้งานครั้งถัดไป</p>
   ${entries.map(([title, purpose, recipient, expiry]) => `<div class="hiring-row"><div><strong>${title}</strong>
     <p>${purpose} · ผู้เข้าถึง: ${recipient}</p><p>กำหนดลบตามแผน ${dateThai.format(expiry)}</p></div>
-    ${expiry - now <= 7 * day ? chip('ครบกำหนดภายใน 7 วัน', 'amber') : chip('อยู่ในระยะเก็บ', 'green')}</div>`).join('') || '<p>ยังไม่มีใบสมัครหรือสถานะการรับรอง</p>'}</section>
-  ${rightsRequests(data, true)}`;
+    ${chip(daysRemaining(expiry, now), expiry - now <= 7 * day ? 'amber' : 'green')}</div>`).join('') || '<p>ยังไม่มีใบสมัครหรือสถานะการรับรองในพื้นที่นี้</p>'}</section>
+  ${employeeExamples(now)}${retentionPanel(url)}${rightsRequests(data, true)}`;
 }
