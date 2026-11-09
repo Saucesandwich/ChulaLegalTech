@@ -48,22 +48,22 @@ async function sessionRole(request, key) {
 function loginPage(role, error = '', status = 200) {
   const account = roles[role];
   const content = account ? `
-    <p class="eyebrow">${account.en}</p>
+    <p class="eyebrow">บัญชีเดโม</p>
     <h1>เข้าสู่ระบบฝั่ง${account.name}</h1>
     <form method="post" action="/login/${role}" class="login-form">
       ${error ? `<p role="alert" class="login-error">${error}</p>` : ''}
-      <label>ชื่อผู้ใช้ <span lang="en">Username</span><input name="username" autocomplete="username" required maxlength="64"></label>
-      <label>รหัสผ่าน <span lang="en">Password</span><input name="password" type="password" autocomplete="current-password" required maxlength="128"></label>
+      <label>ชื่อผู้ใช้<input name="username" autocomplete="username" required maxlength="64"></label>
+      <label>รหัสผ่าน<input name="password" type="password" autocomplete="current-password" required maxlength="128"></label>
       <button class="primary-button">เข้าสู่ระบบ</button>
     </form>
     <a class="login-back" href="/">← เลือกอีกฝั่ง</a>
   ` : `
-    <p class="eyebrow">DEMO ACCESS</p>
+    <p class="eyebrow">พื้นที่ทดลอง</p>
     <h1>ยินดีต้อนรับสู่ปาท่องโก๋</h1>
     <p>เลือกพื้นที่ที่คุณต้องการทดลอง แล้วเข้าสู่ระบบด้วยบัญชีเดโมของฝั่งนั้น</p>
     <div class="portal-choices">
-      <a href="/login/company"><strong>สำหรับบริษัท</strong><span lang="en">Company workspace →</span></a>
-      <a href="/login/applicant"><strong>สำหรับผู้สมัคร</strong><span lang="en">Applicant workspace →</span></a>
+      <a href="/login/company"><strong>สำหรับบริษัท</strong><span>เปิดรับงานและตรวจหลักฐาน →</span></a>
+      <a href="/login/applicant"><strong>สำหรับผู้สมัคร</strong><span>หางานและยื่นขอรับรอง →</span></a>
     </div>
   `;
   return response(`<!doctype html>
@@ -100,7 +100,7 @@ export default {
     if (request.method === 'GET' && path === '/styles.css') return response(assets.styles, 'text/css');
 
     const loginRole = /^\/login\/(company|applicant)$/.exec(path)?.[1];
-    const portal = /^\/(company|applicant)$/.exec(path)?.[1];
+    const portal = /^\/(company|applicant)(\/overview)?$/.exec(path);
     const scriptRole = path === '/app.js' ? 'company' : path === '/candidate.js' ? 'applicant' : null;
 
     if (!env.DEMO_SESSION_SECRET || !env.COMPANY_DEMO_PASSWORD || !env.APPLICANT_DEMO_PASSWORD) {
@@ -108,19 +108,23 @@ export default {
     }
     const key = await crypto.subtle.importKey('raw', encoder.encode(env.DEMO_SESSION_SECRET),
       { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']);
+    const role = await sessionRole(request, key);
     if (request.method === 'POST') {
       if (request.headers.get('origin') !== url.origin) return response('Forbidden', 'text/plain', 403);
       if (path === '/logout') return redirect('/', sessionCookie('', 0, url));
       if (loginRole) return login(request, url, env, key, loginRole);
+      if (path === '/hiring') {
+        if (!role) return redirect('/');
+        return handleHiring(request, url, env, role);
+      }
     }
     if (request.method === 'GET') {
-      const role = await sessionRole(request, key);
       if (path === '/') return role ? redirect('/' + role) : loginPage();
       if (loginRole) return role === loginRole ? redirect('/' + role) : loginPage(loginRole);
       if (portal) {
-        if (!role) return redirect('/login/' + portal);
-        if (role !== portal) return redirect('/' + role);
-        return response(assets[portal], 'text/html');
+        if (!role) return redirect('/login/' + portal[1]);
+        if (role !== portal[1]) return redirect('/' + role);
+        return portal[2] ? response(assets[role], 'text/html') : handleHiring(request, url, env, role);
       }
       if (scriptRole) {
         if (role !== scriptRole) return response('Forbidden', 'text/plain', 403);
